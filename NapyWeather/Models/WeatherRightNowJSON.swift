@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 // MARK: - WeatherRightNow
 struct WeatherRightNow: Codable {
     let coord: Coord
