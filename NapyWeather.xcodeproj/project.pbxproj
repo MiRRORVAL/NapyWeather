@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		495681612B7523FE00EC62DB /* DataMeneger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495681602B7523FE00EC62DB /* DataMeneger.swift */; };
 		495681632B75244900EC62DB /* WeatherRightNowJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495681622B75244900EC62DB /* WeatherRightNowJSON.swift */; };
-		495681662B75255300EC62DB /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495681652B75255300EC62DB /* APIKey.swift */; };
+		4956816B2B752FF500EC62DB /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956816A2B752FF500EC62DB /* APIKey.swift */; };
 		4965B8E02B73E2500008EB2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4965B8DF2B73E2500008EB2C /* AppDelegate.swift */; };
 		4965B8E22B73E2500008EB2C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4965B8E12B73E2500008EB2C /* SceneDelegate.swift */; };
 		4965B8E42B73E2500008EB2C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4965B8E32B73E2500008EB2C /* MainViewController.swift */; };
@@ -21,7 +21,7 @@
 /* Begin PBXFileReference section */
 		495681602B7523FE00EC62DB /* DataMeneger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataMeneger.swift; sourceTree = "<group>"; };
 		495681622B75244900EC62DB /* WeatherRightNowJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRightNowJSON.swift; sourceTree = "<group>"; };
-		495681652B75255300EC62DB /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		4956816A2B752FF500EC62DB /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		4965B8DC2B73E2500008EB2C /* NapyWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NapyWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4965B8DF2B73E2500008EB2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4965B8E12B73E2500008EB2C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,12 +43,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		495681642B75252F00EC62DB /* Key */ = {
+		495681692B752FDE00EC62DB /* Key */ = {
 			isa = PBXGroup;
 			children = (
-				495681652B75255300EC62DB /* APIKey.swift */,
+				4956816A2B752FF500EC62DB /* APIKey.swift */,
 			);
-			path = Key;
+			name = Key;
+			path = Helpers/Key;
 			sourceTree = "<group>";
 		};
 		4965B8D32B73E2500008EB2C = {
@@ -75,7 +76,7 @@
 				4965B8F42B73E2790008EB2C /* ViewControllers */,
 				4965B8F32B73E2690008EB2C /* Storyboards */,
 				4965B8F62B73E2940008EB2C /* Helpers */,
-				495681642B75252F00EC62DB /* Key */,
+				495681692B752FDE00EC62DB /* Key */,
 				4965B8ED2B73E2510008EB2C /* Info.plist */,
 			);
 			path = NapyWeather;
@@ -199,7 +200,7 @@
 				495681612B7523FE00EC62DB /* DataMeneger.swift in Sources */,
 				4965B8E02B73E2500008EB2C /* AppDelegate.swift in Sources */,
 				4965B8E22B73E2500008EB2C /* SceneDelegate.swift in Sources */,
-				495681662B75255300EC62DB /* APIKey.swift in Sources */,
+				4956816B2B752FF500EC62DB /* APIKey.swift in Sources */,
 				495681632B75244900EC62DB /* WeatherRightNowJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
