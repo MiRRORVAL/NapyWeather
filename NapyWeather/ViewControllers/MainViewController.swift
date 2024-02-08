@@ -13,7 +13,8 @@ class MainViewController: UIViewController {
     let dataMeneger = DataMeneger()
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        dataMeneger.delegateByProtocol = self
+        
     }
 
     @IBAction func searchButtonPressed(_ sender: UIButton) {
@@ -21,6 +22,14 @@ class MainViewController: UIViewController {
         guard let searchInput = searchInput, searchInput != "" else { return }
         dataMeneger.fetchData(searchInput)
     }
+    
+}
+
+extension MainViewController: ShareWeatherDataProtocol {
+    func updateUIWithNewData(_ weather: WeatherRightNow) {
+        print(weather.name)
+    }
+    
     
 }
 

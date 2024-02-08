@@ -9,7 +9,7 @@ import Foundation
 
 class DataMeneger {
     
-    
+    var delegateByProtocol: ShareWeatherDataProtocol?
     func fetchData(_ city: String) {
         let url = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=\(APIKey)&units=metric"
         guard let url = URL(string: url) else { return }
@@ -19,9 +19,8 @@ class DataMeneger {
                 return
             }
             do {
-                let decoded = try JSONDecoder().decode(WeatherRightNow.self, from: data)
-                print(decoded.name)
-                print(decoded.main.temp)
+                let decodedData = try JSONDecoder().decode(WeatherRightNow.self, from: data)
+                self.delegateByProtocol?.updateUIWithNewData(decodedData)
             } catch let error {
                 print(error.localizedDescription)
             }
@@ -29,5 +28,6 @@ class DataMeneger {
         dataTask.resume()
     }
 }
+
 
 
