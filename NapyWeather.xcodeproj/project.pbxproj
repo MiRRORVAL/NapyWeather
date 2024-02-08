@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		495681612B7523FE00EC62DB /* DataMeneger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495681602B7523FE00EC62DB /* DataMeneger.swift */; };
+		495681612B7523FE00EC62DB /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495681602B7523FE00EC62DB /* DataManager.swift */; };
 		495681632B75244900EC62DB /* WeatherRightNowJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495681622B75244900EC62DB /* WeatherRightNowJSON.swift */; };
 		4956816B2B752FF500EC62DB /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956816A2B752FF500EC62DB /* APIKey.swift */; };
 		4956816E2B7530E600EC62DB /* DelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956816D2B7530E600EC62DB /* DelegateProtocol.swift */; };
@@ -21,7 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		495681602B7523FE00EC62DB /* DataMeneger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataMeneger.swift; sourceTree = "<group>"; };
+		495681602B7523FE00EC62DB /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		495681622B75244900EC62DB /* WeatherRightNowJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRightNowJSON.swift; sourceTree = "<group>"; };
 		4956816A2B752FF500EC62DB /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		4956816D2B7530E600EC62DB /* DelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateProtocol.swift; sourceTree = "<group>"; };
@@ -126,7 +126,7 @@
 		4965B8F62B73E2940008EB2C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				495681602B7523FE00EC62DB /* DataMeneger.swift */,
+				495681602B7523FE00EC62DB /* DataManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -211,7 +211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4965B8E42B73E2500008EB2C /* MainViewController.swift in Sources */,
-				495681612B7523FE00EC62DB /* DataMeneger.swift in Sources */,
+				495681612B7523FE00EC62DB /* DataManager.swift in Sources */,
 				4965B8E02B73E2500008EB2C /* AppDelegate.swift in Sources */,
 				495681702B75379900EC62DB /* TableViewController.swift in Sources */,
 				4965B8E22B73E2500008EB2C /* SceneDelegate.swift in Sources */,

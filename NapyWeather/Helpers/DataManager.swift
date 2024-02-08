@@ -7,7 +7,10 @@
 
 import Foundation
 
-class DataMeneger {
+class DataManager {
+    
+    static let shared = DataManager()
+    var listOfAddedCitys: [WeatherRightNow] = []
     
     var delegateByProtocol: ShareWeatherDataProtocol?
     func fetchData(_ city: String) {
@@ -20,7 +23,10 @@ class DataMeneger {
             }
             do {
                 let decodedData = try JSONDecoder().decode(WeatherRightNow.self, from: data)
+                self.listOfAddedCitys.append(decodedData)
                 self.delegateByProtocol?.updateUIWithNewData(decodedData)
+                print(self.listOfAddedCitys)
+                print(self.listOfAddedCitys.count)
             } catch let error {
                 print(error.localizedDescription)
             }

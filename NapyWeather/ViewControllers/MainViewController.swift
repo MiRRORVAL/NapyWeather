@@ -10,24 +10,26 @@ import UIKit
 class MainViewController: UIViewController {
 
     @IBOutlet var searchTextField: UITextField!
-    let dataMeneger = DataMeneger()
+    
+    let dataManager = DataManager.shared
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataMeneger.delegateByProtocol = self
+        dataManager.delegateByProtocol = self
         
     }
 
     @IBAction func searchButtonPressed(_ sender: UIButton) {
         let searchInput = searchTextField.text
         guard let searchInput = searchInput, searchInput != "" else { return }
-        dataMeneger.fetchData(searchInput)
+        dataManager.fetchData(searchInput)
     }
     
 }
 
 extension MainViewController: ShareWeatherDataProtocol {
     func updateUIWithNewData(_ weather: WeatherRightNow) {
-        print(weather.name)
+        
     }
     
     

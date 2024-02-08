@@ -9,7 +9,7 @@ import UIKit
 
 class TableViewController: UITableViewController {
 
-
+    let dataManager = DataManager.shared
     // MARK: - Table view data source
 
 //    override func numberOfSections(in tableView: UITableView) -> Int {
@@ -19,13 +19,15 @@ class TableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        let counter = dataManager.listOfAddedCitys.count
+        print(counter)
+        return counter
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-
-        // Configure the cell...
+        print(dataManager.listOfAddedCitys[indexPath.row].name)
+        cell.textLabel?.text = dataManager.listOfAddedCitys[indexPath.row].name
 
         return cell
     }
