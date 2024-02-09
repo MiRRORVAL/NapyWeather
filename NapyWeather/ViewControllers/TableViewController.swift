@@ -10,12 +10,18 @@ import UIKit
 class TableViewController: UITableViewController {
 
     let dataManager = DataManager.shared
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+//        navigationItem.leftBarButtonItem?. = .yellow
+    }
     // MARK: - Table view data source
 
 //    override func numberOfSections(in tableView: UITableView) -> Int {
 //        // #warning Incomplete implementation, return the number of sections
 //        return 2
 //    }
+    
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows

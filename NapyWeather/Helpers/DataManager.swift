@@ -16,7 +16,6 @@ class DataManager {
     
     
     func fetchData(_ city: String) {
-        print(city)
         let url = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=\(APIKey)&units=metric&lang=ru"
         guard let url = URL(string: url) else { return }
         let dataTask = URLSession.shared.dataTask(with: url) { (data, responce, error) in
