@@ -14,21 +14,19 @@ class TableViewController: UITableViewController {
 
 //    override func numberOfSections(in tableView: UITableView) -> Int {
 //        // #warning Incomplete implementation, return the number of sections
-//        return 1
+//        return 2
 //    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         let counter = dataManager.listOfAddedCitys.count
-        print(counter)
         return counter
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        print(dataManager.listOfAddedCitys[indexPath.row].name)
         cell.textLabel?.text = dataManager.listOfAddedCitys[indexPath.row].name
-
+        cell.detailTextLabel?.text = "\(dataManager.listOfAddedCitys[indexPath.row].main.temp) °C"
         return cell
     }
 

@@ -47,6 +47,7 @@ struct Main: Codable {
     }
 }
 
+
 // MARK: - Sys
 struct Sys: Codable {
     let type, id: Int
