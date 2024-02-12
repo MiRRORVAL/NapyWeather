@@ -19,6 +19,7 @@
 		4965B8E92B73E2510008EB2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4965B8E82B73E2510008EB2C /* Assets.xcassets */; };
 		4965B8EC2B73E2510008EB2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4965B8EA2B73E2510008EB2C /* LaunchScreen.storyboard */; };
 		496F53562B7699AC008DD1D3 /* Extention + MainViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496F53552B7699AC008DD1D3 /* Extention + MainViewControllers.swift */; };
+		49C28FCB2B7A739C00DA648F /* CityNameWithDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C28FCA2B7A739C00DA648F /* CityNameWithDate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		4965B8EB2B73E2510008EB2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4965B8ED2B73E2510008EB2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		496F53552B7699AC008DD1D3 /* Extention + MainViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extention + MainViewControllers.swift"; sourceTree = "<group>"; };
+		49C28FCA2B7A739C00DA648F /* CityNameWithDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityNameWithDate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				495681622B75244900EC62DB /* WeatherRightNowJSON.swift */,
+				49C28FCA2B7A739C00DA648F /* CityNameWithDate.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -222,6 +225,7 @@
 				4956816B2B752FF500EC62DB /* APIKey.swift in Sources */,
 				495681632B75244900EC62DB /* WeatherRightNowJSON.swift in Sources */,
 				4956816E2B7530E600EC62DB /* DelegateProtocol.swift in Sources */,
+				49C28FCB2B7A739C00DA648F /* CityNameWithDate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

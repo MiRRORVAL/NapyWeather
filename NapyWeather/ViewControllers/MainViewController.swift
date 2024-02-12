@@ -8,6 +8,7 @@
 import UIKit
 
 class MainViewController: UIViewController {
+   
 
     @IBOutlet var tempLabel: UILabel!
     @IBOutlet var tempFeelsLikeLabel: UILabel!
@@ -19,6 +20,7 @@ class MainViewController: UIViewController {
     @IBOutlet var cloudLevelLable: UILabel!
     @IBOutlet var cityNameLabel: UILabel!
     @IBOutlet var weatherDescriptionLable: UILabel!
+    @IBOutlet var searchHistoryTableView: UITableView!
     
     @IBOutlet var searchStackView: UIStackView!
     
@@ -37,15 +39,13 @@ class MainViewController: UIViewController {
         baseStackView.isHidden = true
         searchTextField.returnKeyType = .search
         dataManager.loadData()
+        searchHistoryTableView.delegate = self
+        searchHistoryTableView.dataSource = self
+        searchHistoryTableView.isHidden = true
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
-    }
-    func serchTheCity() {
-        let searchInput = searchTextField.text
-        guard let searchInput = searchInput, searchInput != "" else { return }
-        dataManager.fetchData(searchInput)
     }
     
     @IBAction func showSearchButtonePressed(_ sender: UIBarButtonItem) {
@@ -53,12 +53,16 @@ class MainViewController: UIViewController {
         if searchStackView.isHidden == true {
             let image = UIImage(systemName: "magnifyingglass")
             navigationItem.rightBarButtonItem?.image = image
+            searchTextField.resignFirstResponder()
+            searchHistoryTableView.isHidden = true
         } else {
             let image = UIImage(systemName: "xmark.app")
             navigationItem.rightBarButtonItem?.image = image
             searchTextField.becomeFirstResponder()
+            searchHistoryTableView.isHidden = false
         }
     }
+    
     
     @IBAction func searchTextFieldWriteStarted(_ sender: UITextField) {
         serchTheCity()

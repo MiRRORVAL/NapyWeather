@@ -45,8 +45,48 @@ extension MainViewController: ShareWeatherDataProtocol {
                     return UIImage(systemName: "minus.circle")
                 }
             }()
+            self.sortSearchedValues()
+            self.searchHistoryTableView.reloadData()
+            
         }
     }
+    
+    func sortSearchedValues(){
+        dataManager.listOfSearchedCityNames.sort {
+            $0.date > $1.date
+        }
+    }
+    
+    
+    func serchTheCity() {
+        let searchInput = searchTextField.text
+        guard let searchInput = searchInput, searchInput != "" else { return }
+        dataManager.fetchData(searchInput)
+    }
+}
+
+extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let counter = dataManager.listOfSearchedCityNames.count
+        return counter
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = dataManager.listOfSearchedCityNames[indexPath.row].name
+        return cell
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cityNameToSearch = dataManager.listOfSearchedCityNames[indexPath.row]
+        searchTextField.text = cityNameToSearch.name
+        dataManager.listOfSearchedCityNames.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .top)
+        serchTheCity()
+    }
+    
 }
 
 extension StringProtocol {

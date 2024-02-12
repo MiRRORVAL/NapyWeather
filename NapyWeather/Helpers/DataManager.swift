@@ -10,6 +10,8 @@ import Foundation
 class DataManager {
     
     var listOfAddedCitys: [WeatherRightNow] = []
+    var listOfSearchedCityNames: [Citys] = []
+    
     static let shared = DataManager()
     
     var delegateByProtocol: ShareWeatherDataProtocol?
@@ -26,7 +28,7 @@ class DataManager {
             do {
                 let decodedData = try JSONDecoder().decode(WeatherRightNow.self, from: data)
                 self.delegateByProtocol?.updateUIWithNewData(decodedData)
-                self.saveData(decodedData)
+                self.saveData(decodedData.name)
             } catch let error {
                 print(error.localizedDescription)
             }
@@ -35,22 +37,33 @@ class DataManager {
     }
 
  
-    func saveData(_ data: WeatherRightNow) {
-        listOfAddedCitys.append(data)
-        guard let dataEncoded = try? JSONEncoder().encode(data) else { return }
-        UserDefaults.standard.setValue(dataEncoded, forKey: "savedData")
-        print(dataEncoded, "is saved")
+    func saveData(_ name: String) {
+//        listOfAddedCitys.append(data)
+        let city = Citys(name: name, date: Date())
+        for city in listOfSearchedCityNames {
+            if city.name == name {
+                guard let findIndex = listOfSearchedCityNames.firstIndex(of: city) else {
+                return
+                }
+                listOfSearchedCityNames.remove(at: findIndex)
+            }
+        }
+        listOfSearchedCityNames.append(city)
+        guard let dataEncodedCitys = try? JSONEncoder().encode(listOfSearchedCityNames) else { return }
+        UserDefaults.standard.setValue(dataEncodedCitys, forKey: "listOfCityNames")
+        print(dataEncodedCitys, "is saved")
     }
     
     
     func loadData() {
-        guard let savedData = UserDefaults.standard.object(forKey: "savedData") as? Data else {
+        guard let decodedCityNames = UserDefaults.standard.object(forKey: "listOfCityNames") as? Data else {
             return }
-        guard let decodedData = try? JSONDecoder().decode(WeatherRightNow.self,
-                                                         from: savedData) else { return }
-        listOfAddedCitys.append(decodedData)
-        self.delegateByProtocol?.updateUIWithNewData(decodedData)
-        print(savedData, "is loaded")
+        guard let cityNames = try? JSONDecoder().decode([Citys].self,
+                                                         from: decodedCityNames) else { return }
+        listOfSearchedCityNames = cityNames
+        guard let name = listOfSearchedCityNames.last?.name else { return }
+        fetchData(name)
+        print(decodedCityNames, "is loaded")
     }
     
     
