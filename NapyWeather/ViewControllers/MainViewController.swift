@@ -35,20 +35,40 @@ class MainViewController: UIViewController {
         dataManager.delegateByProtocol = self
         searchStackView.isHidden = true
         baseStackView.isHidden = true
+        searchTextField.returnKeyType = .search
         dataManager.loadData()
     }
 
-    
-    @IBAction func showSearchButtonePressed(_ sender: UIBarButtonItem) {
-        searchStackView.isHidden = !searchStackView.isHidden
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
-    
-    
-    @IBAction func searchButtonPressed(_ sender: UIButton) {
+    func serchTheCity() {
         let searchInput = searchTextField.text
         guard let searchInput = searchInput, searchInput != "" else { return }
         dataManager.fetchData(searchInput)
     }
+    
+    @IBAction func showSearchButtonePressed(_ sender: UIBarButtonItem) {
+        searchStackView.isHidden = !searchStackView.isHidden
+        if searchStackView.isHidden == true {
+            let image = UIImage(systemName: "magnifyingglass")
+            navigationItem.rightBarButtonItem?.image = image
+        } else {
+            let image = UIImage(systemName: "xmark.app")
+            navigationItem.rightBarButtonItem?.image = image
+            searchTextField.becomeFirstResponder()
+        }
+    }
+    
+    @IBAction func searchTextFieldWriteStarted(_ sender: UITextField) {
+        serchTheCity()
+    }
+    
+    
+    @IBAction func searchButtonPressed(_ sender: UIButton) {
+        serchTheCity()
+    }
+    
     
 }
 
