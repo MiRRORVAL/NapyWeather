@@ -8,8 +8,8 @@
 import UIKit
 
 class MainViewController: UIViewController {
-   
-
+    
+    
     @IBOutlet var tempLabel: UILabel!
     @IBOutlet var tempFeelsLikeLabel: UILabel!
     @IBOutlet var windSpeedLable: UILabel!
@@ -43,7 +43,7 @@ class MainViewController: UIViewController {
         searchHistoryTableView.dataSource = self
         searchHistoryTableView.isHidden = true
     }
-
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -65,14 +65,15 @@ class MainViewController: UIViewController {
     
     
     @IBAction func searchTextFieldWriteStarted(_ sender: UITextField) {
-        serchTheCity()
+        guard let inputSrting = searchTextField.text, inputSrting != "" else { return }
+        dataManager.fetchData(inputSrting, false)
     }
     
     
     @IBAction func searchButtonPressed(_ sender: UIButton) {
-        serchTheCity()
+        guard let inputSrting = searchTextField.text, inputSrting != "" else { return }
+        dataManager.fetchData(inputSrting, false)
     }
-    
-    
 }
+    
 

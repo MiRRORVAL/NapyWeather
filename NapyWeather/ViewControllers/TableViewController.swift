@@ -13,7 +13,6 @@ class TableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        navigationItem.leftBarButtonItem?. = .yellow
     }
     // MARK: - Table view data source
 

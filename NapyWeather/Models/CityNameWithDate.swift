@@ -10,10 +10,12 @@ import Foundation
 struct Citys: Codable, Hashable {
     
     let name: String
-    var date: Date
+    let date: Date
+    var isFavorite: Bool
     
-    init(name: String, date: Date) {
+    init(name: String, date: Date, isFavorite: Bool) {
         self.name = name
         self.date = Date()
+        self.isFavorite = isFavorite
     }
 }
