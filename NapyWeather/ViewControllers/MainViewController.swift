@@ -9,7 +9,6 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    
     @IBOutlet var tempLabel: UILabel!
     @IBOutlet var tempFeelsLikeLabel: UILabel!
     @IBOutlet var windSpeedLable: UILabel!
@@ -34,14 +33,18 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataManager.delegateByProtocol = self
+
         searchStackView.isHidden = true
         baseStackView.isHidden = true
-        searchTextField.returnKeyType = .search
-        dataManager.loadData()
+        searchHistoryTableView.isHidden = true
+        
         searchHistoryTableView.delegate = self
         searchHistoryTableView.dataSource = self
-        searchHistoryTableView.isHidden = true
+        dataManager.delegateByProtocol = self
+        
+        searchTextField.returnKeyType = .search
+        
+        dataManager.loadData()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -73,6 +76,12 @@ class MainViewController: UIViewController {
     @IBAction func searchButtonPressed(_ sender: UIButton) {
         guard let inputSrting = searchTextField.text, inputSrting != "" else { return }
         dataManager.fetchData(inputSrting, false)
+    }
+    
+
+    @IBAction func gotoTheBookmarkTableViewBattonePressed(_ sender: UIBarButtonItem) {
+        dataManager.fetchAllOfBookmarkedCitysList()
+        performSegue(withIdentifier: "goTwo", sender: nil)
     }
 }
     

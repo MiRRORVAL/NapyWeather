@@ -15,14 +15,6 @@ class SearchTableViewCell: UITableViewCell {
     
     let dataManager = DataManager.shared
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-    }
 
     @IBAction func cellFavoriteBattonePressed(_ sender: UIButton) {
         guard let superview = self.superview as? UITableView else { return }
