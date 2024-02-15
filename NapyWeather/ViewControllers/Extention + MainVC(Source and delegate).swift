@@ -31,14 +31,16 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cityNameToSearch = dataManager.listOfSearchedCityNames[indexPath.row]
-        searchTextField.text = cityNameToSearch.name
-        guard let inputSrting = searchTextField.text, inputSrting != "" else { return }
         self.dataManager.listOfSearchedCityNames.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .top)
         dataManager.fetchData(cityNameToSearch.name, cityNameToSearch.isFavorite)
         tableView.reloadData()
-        
-    }
+        searchStackView.isHidden = true
+        searchHistoryTableView.isHidden = true
+        let image = UIImage(systemName: "magnifyingglass")
+        self.navigationItem.rightBarButtonItem?.image = image
+        self.searchTextField.resignFirstResponder()
+        }
     
     
     func tableView(_ tableView: UITableView,

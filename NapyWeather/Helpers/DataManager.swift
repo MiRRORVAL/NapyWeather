@@ -68,21 +68,20 @@ class DataManager {
         }
     }
 
-    
-    func IsItNewData(_ name: String) -> Bool {
-        var finalResolt = true
-        for city in listOfSearchedCityNames {
-            if city.name == name {
-                finalResolt = false
-            }
-        }
-            if finalResolt {
-                return true
-            } else {
-                return false
-            
-        }
-    }
+//    ToDo -- Нужно проверить есть ли город уже в списке
+//    func IsItNewData(_ name: String) -> Bool {
+//        var finalResolt = true
+//        for city in listOfSearchedCityNames {
+//            if city.name == name {
+//                finalResolt = false
+//            }
+//        }
+//            if finalResolt {
+//                return true
+//            } else {
+//                return false
+//        }
+//    }
     
     func sortSearchedValues(_ list: [Citys]) {
         var sortedList = list
@@ -92,11 +91,6 @@ class DataManager {
         listOfSearchedCityNames = sortedList
     }
  
-    func saveNewData(_ name: String) {
-        let city = Citys(name: name, date: Date(), isFavorite: false)
-        listOfSearchedCityNames.insert(city, at: 0)
-        updateData()
-    }
     
     func correctData(_ name: String, _ isFavorite: Bool) {
         let city = Citys(name: name, date: Date(), isFavorite: isFavorite)

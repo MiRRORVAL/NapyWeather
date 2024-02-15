@@ -21,6 +21,11 @@ class MainViewController: UIViewController {
     @IBOutlet var weatherDescriptionLable: UILabel!
     @IBOutlet var searchHistoryTableView: UITableView!
     
+
+    @IBOutlet var dayProgresSlider: UISlider!
+    @IBOutlet var dayStartLable: UILabel!
+    @IBOutlet var dayEndLable: UILabel!
+    
     @IBOutlet var searchStackView: UIStackView!
     
     @IBOutlet var baseStackView: UIStackView!
@@ -43,6 +48,7 @@ class MainViewController: UIViewController {
         dataManager.delegateByProtocol = self
         
         searchTextField.returnKeyType = .search
+
         
         dataManager.loadData()
     }
@@ -54,34 +60,48 @@ class MainViewController: UIViewController {
     @IBAction func showSearchButtonePressed(_ sender: UIBarButtonItem) {
         searchStackView.isHidden = !searchStackView.isHidden
         if searchStackView.isHidden == true {
-            let image = UIImage(systemName: "magnifyingglass")
-            navigationItem.rightBarButtonItem?.image = image
-            searchTextField.resignFirstResponder()
-            searchHistoryTableView.isHidden = true
+                let image = UIImage(systemName: "magnifyingglass")
+                self.navigationItem.rightBarButtonItem?.image = image
+                self.searchTextField.resignFirstResponder()
+                self.searchHistoryTableView.isHidden = true
+
         } else {
-            let image = UIImage(systemName: "xmark.app")
-            navigationItem.rightBarButtonItem?.image = image
-            searchTextField.becomeFirstResponder()
-            searchHistoryTableView.isHidden = false
+            UIView.animate(withDuration: 0.5, delay: 0) {
+                let image = UIImage(systemName: "xmark.app")
+                self.navigationItem.rightBarButtonItem?.image = image
+                self.searchTextField.becomeFirstResponder()
+                if !self.dataManager.listOfSearchedCityNames.isEmpty {
+                    self.searchHistoryTableView.isHidden = false
+                }
+                
+            }
         }
     }
     
     
-    @IBAction func searchTextFieldWriteStarted(_ sender: UITextField) {
-        guard let inputSrting = searchTextField.text, inputSrting != "" else { return }
-        dataManager.fetchData(inputSrting, false)
+    @IBAction func primaryActionforReturnKey(_ sender: UITextField) {
+        searchIsDone()
     }
     
-    
     @IBAction func searchButtonPressed(_ sender: UIButton) {
-        guard let inputSrting = searchTextField.text, inputSrting != "" else { return }
-        dataManager.fetchData(inputSrting, false)
+        searchIsDone()
     }
     
 
     @IBAction func gotoTheBookmarkTableViewBattonePressed(_ sender: UIBarButtonItem) {
         dataManager.fetchAllOfBookmarkedCitysList()
+        searchStackView.isHidden = true
+        searchHistoryTableView.isHidden = true
+        let image = UIImage(systemName: "magnifyingglass")
+        self.navigationItem.rightBarButtonItem?.image = image
+        self.searchTextField.resignFirstResponder()
         performSegue(withIdentifier: "goTwo", sender: nil)
+    }
+    
+    func searchIsDone() {
+        self.searchTextField.resignFirstResponder()
+        guard let inputSrting = searchTextField.text, inputSrting != "" else { return }
+        dataManager.fetchData(inputSrting, false)
     }
 }
     
