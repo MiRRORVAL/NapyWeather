@@ -53,7 +53,6 @@ extension MainViewController: ShareWeatherDataProtocol {
             let dayLongest = dateOfSunrise.distance(to: dateOfSunset)
             let porcentLeft = (timeLeftBeforeSunset * 100) / dayLongest
             
-            print(porcentLeft)
             
             self.dayProgresSlider.setValue(Float(100 - porcentLeft), animated: true)
 
