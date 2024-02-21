@@ -27,19 +27,6 @@ extension MainViewController: ShareWeatherDataProtocol {
                 let weatherDescription = weather.weather.first!.description.firstCapitalized
                 return weatherDescription
             }()
-            self.statusImageView.image = {
-                switch weather.weather.first!.id {
-                case 200...232: return UIImage(systemName: "cloud.bolt.rain.circle")
-                case 300...321: return UIImage(systemName: "cloud.drizzle")
-                case 500...531: return UIImage(systemName: "cloud.rain")
-                case 600...622: return UIImage(systemName: "cloud.snow")
-                case 700...781: return UIImage(systemName: "cloud.fog")
-                case 800: return UIImage(systemName: "sun.max")
-                case 801...804: return UIImage(systemName: "smoke")
-                default:
-                    return UIImage(systemName: "minus.circle")
-                }
-            }()
             
             let doubleSunrise = Double(weather.sys.sunrise)
             let dateOfSunrise = Date(timeIntervalSince1970: doubleSunrise)
@@ -66,12 +53,41 @@ extension MainViewController: ShareWeatherDataProtocol {
             let dayLongest = dateOfSunrise.distance(to: dateOfSunset)
             let porcentLeft = (timeLeftBeforeSunset * 100) / dayLongest
             
+            print(porcentLeft)
+            
             self.dayProgresSlider.setValue(Float(100 - porcentLeft), animated: true)
-            self.dayProgresSlider.setThumbImage(UIImage(systemName: "sun.max")?.withTintColor(.orange, renderingMode: .alwaysOriginal), for: .normal)
+
+            if porcentLeft < 0 {
+                self.dayProgresSlider.setThumbImage(UIImage(systemName: "moonphase.new.moon")?.withTintColor(.gray,
+                    renderingMode: .alwaysOriginal), for: .normal)
+            } else {
+                self.dayProgresSlider.setThumbImage(UIImage(systemName: "sun.max")?.withTintColor(.orange,
+                    renderingMode: .alwaysOriginal), for: .normal)
+            }
             self.dayLonestLable.text = {
                 let trim = String(format: "%.1f", (dayLongest / 60 / 60))
                 return "\(trim) ч"
             }()
+            
+            self.statusImageView.image = {
+                switch weather.weather.first!.id {
+                case 200...232: return UIImage(systemName: "cloud.bolt.rain.circle")
+                case 300...321: return UIImage(systemName: "cloud.drizzle")
+                case 500...531: return UIImage(systemName: "cloud.rain")
+                case 600...622: return UIImage(systemName: "cloud.snow")
+                case 700...781: return UIImage(systemName: "cloud.fog")
+                case 800: if porcentLeft > 0 {
+                    return UIImage(systemName: "sun.max")
+                } else {
+                    return UIImage(systemName: "moon")
+                }
+                    
+                case 801...804: return UIImage(systemName: "smoke")
+                default:
+                    return UIImage(systemName: "minus.circle")
+                }
+            }()
+            
             self.searchHistoryTableView.reloadData()
             
         }

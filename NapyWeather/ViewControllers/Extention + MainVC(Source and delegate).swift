@@ -16,8 +16,10 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SearchTableViewCell
+        searchHistoryTableView.separatorColor = .white
+        cell.cityNameLable.textColor = .white
         cell.cityNameLable?.text = dataManager.listOfSearchedCityNames[indexPath.row].name
-        cell.cellFavoriteBattone.tintColor = .orange
+        cell.cellFavoriteBattone.tintColor = .white
         if dataManager.listOfSearchedCityNames[indexPath.row].isFavorite == true {
             let image = UIImage(systemName: "star.fill")
             cell.cellFavoriteBattone.setImage(image, for: .normal)

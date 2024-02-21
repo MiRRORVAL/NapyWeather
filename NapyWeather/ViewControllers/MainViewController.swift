@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class MainViewController: UIViewController {
     
@@ -18,6 +19,7 @@ class MainViewController: UIViewController {
     @IBOutlet var visibilityLable: UILabel!
     @IBOutlet var cloudLevelLable: UILabel!
     @IBOutlet var cityNameLabel: UILabel!
+    @IBOutlet var serchLocationButton: UIButton!
     @IBOutlet var weatherDescriptionLable: UILabel!
     @IBOutlet var searchHistoryTableView: UITableView!
     
@@ -35,6 +37,13 @@ class MainViewController: UIViewController {
     @IBOutlet var searchTextField: UITextField!
     
     let dataManager = DataManager.shared
+    lazy var locationManager: CLLocationManager = {
+        let locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+        locationManager.requestWhenInUseAuthorization()
+        return locationManager
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,22 +57,30 @@ class MainViewController: UIViewController {
         dataManager.delegateByProtocol = self
         
         searchTextField.returnKeyType = .search
-
         
         dataManager.loadData()
+        
+        isDataLoaded()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
     
+    
+    func hideSearchStack() {
+        searchStackView.isHidden = true
+        searchHistoryTableView.isHidden = true
+        let image = UIImage(systemName: "magnifyingglass")
+        self.navigationItem.rightBarButtonItem?.image = image
+        self.searchTextField.resignFirstResponder()
+    }
+    
+    
     @IBAction func showSearchButtonePressed(_ sender: UIBarButtonItem) {
         searchStackView.isHidden = !searchStackView.isHidden
         if searchStackView.isHidden == true {
-                let image = UIImage(systemName: "magnifyingglass")
-                self.navigationItem.rightBarButtonItem?.image = image
-                self.searchTextField.resignFirstResponder()
-                self.searchHistoryTableView.isHidden = true
+            hideSearchStack()
 
         } else {
             UIView.animate(withDuration: 0.5, delay: 0) {
@@ -73,8 +90,49 @@ class MainViewController: UIViewController {
                 if !self.dataManager.listOfSearchedCityNames.isEmpty {
                     self.searchHistoryTableView.isHidden = false
                 }
-                
             }
+        }
+    }
+    
+    func isDataLoaded() {
+        if dataManager.listOfSearchedCityNames.isEmpty {
+            serchLocation()
+        }
+    }
+    
+    private func showAlert() {
+        let alert = UIAlertController(title: "Ошибка",
+                                      message: "Доступ к геоданным запрещен пользователем",
+                                      preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .default)
+        alert.addAction(action)
+        present(alert, animated: true)
+    }
+    
+    func serchLocation() {
+        DispatchQueue.global().async {
+            if CLLocationManager.locationServicesEnabled() {
+                DispatchQueue.main.async {
+                    self.locationManager.requestLocation()
+                    self.hideSearchStack()
+                }
+            } else {
+                self.showAlert()
+            }
+        }
+    }
+    
+    
+    @IBAction func serchLocationButtonPressed(_ sender: UIButton) {
+        serchLocation()
+    }
+    
+    
+    @IBAction func searchTextFieldWrireStrted(_ sender: UITextField) {
+        if searchTextField.text == "" {
+            serchLocationButton.isHidden = false
+        } else {
+            serchLocationButton.isHidden = true
         }
     }
     
@@ -83,20 +141,19 @@ class MainViewController: UIViewController {
         searchIsDone()
     }
     
+    
     @IBAction func searchButtonPressed(_ sender: UIButton) {
         searchIsDone()
     }
     
-
+    
+    
     @IBAction func gotoTheBookmarkTableViewBattonePressed(_ sender: UIBarButtonItem) {
         dataManager.fetchAllOfBookmarkedCitysList()
-        searchStackView.isHidden = true
-        searchHistoryTableView.isHidden = true
-        let image = UIImage(systemName: "magnifyingglass")
-        self.navigationItem.rightBarButtonItem?.image = image
-        self.searchTextField.resignFirstResponder()
+        hideSearchStack()
         performSegue(withIdentifier: "goTwo", sender: nil)
     }
+    
     
     func searchIsDone() {
         self.searchTextField.resignFirstResponder()
@@ -105,4 +162,15 @@ class MainViewController: UIViewController {
     }
 }
     
-
+extension MainViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else { return }
+        let latitude = location.coordinate.latitude
+        let longitude = location.coordinate.longitude
+        dataManager.fetchDataByCoordinate("\(latitude)", "\(longitude)")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error.localizedDescription)
+    }
+}
