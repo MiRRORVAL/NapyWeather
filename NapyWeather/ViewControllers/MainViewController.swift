@@ -100,9 +100,9 @@ class MainViewController: UIViewController {
         }
     }
     
-    private func showAlert() {
+    private func showAlert(_ text: String) {
         let alert = UIAlertController(title: "Ошибка",
-                                      message: "Нет доступ к геоданным",
+                                      message: text,
                                       preferredStyle: .alert)
         let action = UIAlertAction(title: "Ok", style: .default)
         alert.addAction(action)
@@ -111,13 +111,13 @@ class MainViewController: UIViewController {
     
     func serchLocation() {
         DispatchQueue.global().async {
+            CLLocationManager.locationServicesEnabled()
             if CLLocationManager.locationServicesEnabled() {
                 DispatchQueue.main.async {
-                    self.locationManager.requestLocation()
-                    self.hideSearchStack()
+                    self.checkLocationAuthorization()
                 }
             } else {
-                self.showAlert()
+                self.showAlert("Не получено разрешение на использование геопозиции от пользователя")
             }
         }
     }
@@ -125,6 +125,7 @@ class MainViewController: UIViewController {
     
     @IBAction func serchLocationButtonPressed(_ sender: UIButton) {
         serchLocation()
+        hideSearchStack()
     }
     
     
@@ -170,8 +171,28 @@ extension MainViewController: CLLocationManagerDelegate {
         dataManager.fetchDataByCoordinate("\(latitude)", "\(longitude)")
     }
     
+    
+    private func checkLocationAuthorization(){
+        switch locationManager.authorizationStatus{
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .restricted:
+            self.showAlert("Определение геопозиции ограничено")
+        case .denied:
+            self.showAlert("Пользователь запретил использование геопозиции")
+        case .authorizedWhenInUse, .authorizedAlways:
+            self.locationManager.requestLocation()
+        default:
+            break
+        }
+    }
+    
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+            checkLocationAuthorization()
+        }
+    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error.localizedDescription)
-        showAlert()
     }
 }
