@@ -102,7 +102,7 @@ class MainViewController: UIViewController {
     
     private func showAlert() {
         let alert = UIAlertController(title: "Ошибка",
-                                      message: "Доступ к геоданным запрещен пользователем",
+                                      message: "Нет доступ к геоданным",
                                       preferredStyle: .alert)
         let action = UIAlertAction(title: "Ok", style: .default)
         alert.addAction(action)
@@ -172,5 +172,6 @@ extension MainViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error.localizedDescription)
+        showAlert()
     }
 }
