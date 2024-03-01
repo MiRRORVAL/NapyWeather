@@ -36,6 +36,9 @@ class MainViewController: UIViewController {
     
     @IBOutlet var searchTextField: UITextField!
     
+    var replicator: CAReplicatorLayer!
+    var sourceLayer: CALayer!
+    
     let dataManager = DataManager.shared
     lazy var locationManager: CLLocationManager = {
         let locationManager = CLLocationManager()
@@ -55,6 +58,11 @@ class MainViewController: UIViewController {
         searchHistoryTableView.delegate = self
         searchHistoryTableView.dataSource = self
         dataManager.delegateByProtocol = self
+        searchHistoryTableView.layer.borderWidth = 2
+        searchHistoryTableView.layer.borderColor = CGColor(gray: 0.5, alpha: 0.2)
+        dayProgresSlider.layer.cornerRadius = 10
+        dayProgresSlider.layer.borderWidth = 15
+        dayProgresSlider.layer.borderColor = CGColor(gray: 1, alpha: 0.2)
         
         searchTextField.returnKeyType = .search
         
@@ -73,6 +81,7 @@ class MainViewController: UIViewController {
         searchHistoryTableView.isHidden = true
         let image = UIImage(systemName: "magnifyingglass")
         self.navigationItem.rightBarButtonItem?.image = image
+        self.searchTextField.text = .none
         self.searchTextField.resignFirstResponder()
     }
     

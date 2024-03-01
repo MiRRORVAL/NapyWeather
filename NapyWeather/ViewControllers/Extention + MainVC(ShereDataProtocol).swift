@@ -65,11 +65,11 @@ extension MainViewController: ShareWeatherDataProtocol {
             }
             self.dayLonestLable.text = {
                 let trim = String(format: "%.1f", (dayLongest / 60 / 60))
-                return "\(trim) ч"
+                return "\(trim)"
             }()
             
             self.statusImageView.image = {
-                switch weather.weather.first!.id {
+                switch weather.weather.last!.id {
                 case 200...232: return UIImage(systemName: "cloud.bolt.rain.circle")
                 case 300...321: return UIImage(systemName: "cloud.drizzle")
                 case 500...531: return UIImage(systemName: "cloud.rain")
