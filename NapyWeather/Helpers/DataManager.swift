@@ -67,25 +67,35 @@ class DataManager {
     }
     
     func fetchAllOfBookmarkedCitysList() {
-        for city in listOfSearchedCityNames {
-            if city.isFavorite {
+        let filteredFavorites = listOfSearchedCityNames.filter {
+            $0.isFavorite == true
+        }
+        var allCitys: [WeatherRightNow] = []
+        var counter = 0
+        
+        for city in filteredFavorites {
                 let url = "https://api.openweathermap.org/data/2.5/weather?q=\(city.name)&appid=\(APIKey)&units=metric&lang=ru"
                 guard let url = URL(string: url) else { return }
                 let dataTask = URLSession.shared.dataTask(with: url) { (data, responce, error) in
                     guard let data = data, error == nil else { return }
                     do {
                         let decodedData = try JSONDecoder().decode(WeatherRightNow.self, from: data)
-                        self.delegateTableByProtocol?.updateUIWithNewData(decodedData)
+                        allCitys.append(decodedData)
                     } catch let error {
                         print(error.localizedDescription)
                     }
+                    
+                    if counter == filteredFavorites.count - 1 {
+                        self.delegateTableByProtocol?.updateUIWithNewData(allCitys)
+                    }
+                    
+                    counter += 1
                 }
                 dataTask.resume()
-            }
         }
     }
 
-//    ToDo -- Нужно проверить есть ли город уже в списке
+//: ToDo -- Нужно проверить есть ли город уже в списке
 //    func IsItNewData(_ name: String) -> Bool {
 //        var finalResolt = true
 //        for city in listOfSearchedCityNames {

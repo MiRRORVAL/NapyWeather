@@ -75,7 +75,6 @@ class MainViewController: UIViewController {
         self.view.endEditing(true)
     }
     
-    
     func hideSearchStack() {
         searchStackView.isHidden = true
         searchHistoryTableView.isHidden = true
@@ -85,12 +84,10 @@ class MainViewController: UIViewController {
         self.searchTextField.resignFirstResponder()
     }
     
-    
     @IBAction func showSearchButtonePressed(_ sender: UIBarButtonItem) {
         searchStackView.isHidden = !searchStackView.isHidden
         if searchStackView.isHidden == true {
             hideSearchStack()
-
         } else {
             UIView.animate(withDuration: 0.5, delay: 0) {
                 let image = UIImage(systemName: "xmark.app")
@@ -105,11 +102,11 @@ class MainViewController: UIViewController {
     
     func isDataLoaded() {
         if dataManager.listOfSearchedCityNames.isEmpty {
-            serchLocation()
+            searchLocation()
         }
     }
     
-    private func showAlert(_ text: String) {
+    func showAlert(_ text: String) {
         let alert = UIAlertController(title: "Ошибка",
                                       message: text,
                                       preferredStyle: .alert)
@@ -118,7 +115,7 @@ class MainViewController: UIViewController {
         present(alert, animated: true)
     }
     
-    func serchLocation() {
+    func searchLocation() {
         DispatchQueue.global().async {
             CLLocationManager.locationServicesEnabled()
             if CLLocationManager.locationServicesEnabled() {
@@ -131,12 +128,10 @@ class MainViewController: UIViewController {
         }
     }
     
-    
     @IBAction func serchLocationButtonPressed(_ sender: UIButton) {
-        serchLocation()
+        searchLocation()
         hideSearchStack()
     }
-    
     
     @IBAction func searchTextFieldWrireStrted(_ sender: UITextField) {
         if searchTextField.text == "" {
@@ -146,24 +141,19 @@ class MainViewController: UIViewController {
         }
     }
     
-    
     @IBAction func primaryActionforReturnKey(_ sender: UITextField) {
         searchIsDone()
     }
     
-    
     @IBAction func searchButtonPressed(_ sender: UIButton) {
         searchIsDone()
     }
-    
-    
     
     @IBAction func gotoTheBookmarkTableViewBattonePressed(_ sender: UIBarButtonItem) {
         dataManager.fetchAllOfBookmarkedCitysList()
         hideSearchStack()
         performSegue(withIdentifier: "goTwo", sender: nil)
     }
-    
     
     func searchIsDone() {
         self.searchTextField.resignFirstResponder()
@@ -172,36 +162,4 @@ class MainViewController: UIViewController {
     }
 }
     
-extension MainViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else { return }
-        let latitude = location.coordinate.latitude
-        let longitude = location.coordinate.longitude
-        dataManager.fetchDataByCoordinate("\(latitude)", "\(longitude)")
-    }
-    
-    
-    private func checkLocationAuthorization(){
-        switch locationManager.authorizationStatus{
-        case .notDetermined:
-            locationManager.requestWhenInUseAuthorization()
-        case .restricted:
-            self.showAlert("Определение геопозиции ограничено")
-        case .denied:
-            self.showAlert("Пользователь запретил использование геопозиции")
-        case .authorizedWhenInUse, .authorizedAlways:
-            self.locationManager.requestLocation()
-        default:
-            break
-        }
-    }
-    
-    
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-            checkLocationAuthorization()
-        }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error.localizedDescription)
-    }
-}
+

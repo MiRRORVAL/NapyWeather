@@ -13,10 +13,13 @@ class TableViewController: UITableViewController {
 
     let dataManager = DataManager.shared
 
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         dataManager.delegateTableByProtocol = self
+        activityIndicator.startAnimating()
+        activityIndicator.hidesWhenStopped = true
     }
 
 
@@ -29,6 +32,10 @@ class TableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellBookmark", for: indexPath)
         cell.textLabel?.text = citys[indexPath.row].name
         cell.detailTextLabel?.text = "\(citys[indexPath.row].main.temp) °C"
+        
+        if indexPath.row == citys.count - 1 {
+            activityIndicator.stopAnimating()
+        }
         return cell
     }
 }

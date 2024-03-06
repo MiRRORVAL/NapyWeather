@@ -7,5 +7,5 @@
 
 
 protocol ShareWeatherDataListProtocol {
-    func updateUIWithNewData(_ weather: WeatherRightNow)
+    func updateUIWithNewData(_ weather: [WeatherRightNow])
 }

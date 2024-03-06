@@ -9,8 +9,8 @@ import Foundation
 
 extension TableViewController: ShareWeatherDataListProtocol {
     
-    func updateUIWithNewData(_ weather: WeatherRightNow) {
-        citys.append(weather)
+    func updateUIWithNewData(_ weather: [WeatherRightNow]) {
+        citys = weather
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }

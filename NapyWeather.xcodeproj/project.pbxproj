@@ -12,6 +12,7 @@
 		4956816B2B752FF500EC62DB /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956816A2B752FF500EC62DB /* APIKey.swift */; };
 		4956816E2B7530E600EC62DB /* ShareWeatherDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956816D2B7530E600EC62DB /* ShareWeatherDataProtocol.swift */; };
 		495681702B75379900EC62DB /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956816F2B75379900EC62DB /* TableViewController.swift */; };
+		49612AFA2B9891440048EABE /* Extention + MainVC(Location).swift in Sources */ = {isa = PBXBuildFile; fileRef = 49612AF92B9891440048EABE /* Extention + MainVC(Location).swift */; };
 		4962C7052B865FD90053E170 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4962C7072B865FD90053E170 /* Assets.xcassets */; };
 		496330962B7B544800222577 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496330952B7B544800222577 /* SearchTableViewCell.swift */; };
 		49637E5C2B7CF84100AB68DE /* ShareWeatherDataListProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49637E5B2B7CF84100AB68DE /* ShareWeatherDataListProtocol.swift */; };
@@ -33,6 +34,7 @@
 		4956816A2B752FF500EC62DB /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		4956816D2B7530E600EC62DB /* ShareWeatherDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareWeatherDataProtocol.swift; sourceTree = "<group>"; };
 		4956816F2B75379900EC62DB /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		49612AF92B9891440048EABE /* Extention + MainVC(Location).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extention + MainVC(Location).swift"; sourceTree = "<group>"; };
 		4962C7062B865FD90053E170 /* Base */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Base; path = Base.lproj/Assets.xcassets; sourceTree = "<group>"; };
 		496330952B7B544800222577 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		49637E5B2B7CF84100AB68DE /* ShareWeatherDataListProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareWeatherDataListProtocol.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				4965B8E32B73E2500008EB2C /* MainViewController.swift */,
 				496F53552B7699AC008DD1D3 /* Extention + MainVC(ShereDataProtocol).swift */,
 				49637E5F2B7CFD4D00AB68DE /* Extention + MainVC(Source and delegate).swift */,
+				49612AF92B9891440048EABE /* Extention + MainVC(Location).swift */,
 				4956816F2B75379900EC62DB /* TableViewController.swift */,
 				49637E612B7CFE1600AB68DE /* Extention + TableVC(ShareWeatherDataListProtocol).swift */,
 			);
@@ -237,6 +240,7 @@
 				495681612B7523FE00EC62DB /* DataManager.swift in Sources */,
 				4965B8E02B73E2500008EB2C /* AppDelegate.swift in Sources */,
 				495681702B75379900EC62DB /* TableViewController.swift in Sources */,
+				49612AFA2B9891440048EABE /* Extention + MainVC(Location).swift in Sources */,
 				49637E5E2B7CFBDA00AB68DE /* Extention + StringProtocol.swift in Sources */,
 				496330962B7B544800222577 /* SearchTableViewCell.swift in Sources */,
 				4965B8E22B73E2500008EB2C /* SceneDelegate.swift in Sources */,
