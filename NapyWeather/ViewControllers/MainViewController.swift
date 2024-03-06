@@ -60,9 +60,10 @@ class MainViewController: UIViewController {
         dataManager.delegateByProtocol = self
         searchHistoryTableView.layer.borderWidth = 2
         searchHistoryTableView.layer.borderColor = CGColor(gray: 0.5, alpha: 0.2)
-        dayProgresSlider.layer.cornerRadius = 10
+        dayProgresSlider.layer.cornerRadius = 100
         dayProgresSlider.layer.borderWidth = 15
-        dayProgresSlider.layer.borderColor = CGColor(gray: 1, alpha: 0.2)
+        let color = UIColor.init(red: 1, green: 1, blue: 0.5, alpha: 0.1).cgColor
+        dayProgresSlider.layer.borderColor = color
         
         searchTextField.returnKeyType = .search
         
@@ -142,23 +143,23 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func primaryActionforReturnKey(_ sender: UITextField) {
-        searchIsDone()
+        searchIsStarted()
     }
     
     @IBAction func searchButtonPressed(_ sender: UIButton) {
-        searchIsDone()
+        searchIsStarted()
     }
     
     @IBAction func gotoTheBookmarkTableViewBattonePressed(_ sender: UIBarButtonItem) {
-        dataManager.fetchAllOfBookmarkedCitysList()
+        dataManager.fetchAllBookmarkedCitys()
         hideSearchStack()
         performSegue(withIdentifier: "goTwo", sender: nil)
     }
     
-    func searchIsDone() {
+    func searchIsStarted() {
         self.searchTextField.resignFirstResponder()
         guard let inputSrting = searchTextField.text, inputSrting != "" else { return }
-        dataManager.fetchData(inputSrting, false)
+        dataManager.fetchData(inputSrting)
     }
 }
     

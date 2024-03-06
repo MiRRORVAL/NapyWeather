@@ -32,16 +32,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cityNameToSearch = dataManager.listOfSearchedCityNames[indexPath.row]
-        self.dataManager.listOfSearchedCityNames.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .top)
-        dataManager.fetchData(cityNameToSearch.name, cityNameToSearch.isFavorite)
-        tableView.reloadData()
-        searchStackView.isHidden = true
-        searchHistoryTableView.isHidden = true
-        let image = UIImage(systemName: "magnifyingglass")
-        self.navigationItem.rightBarButtonItem?.image = image
-        self.searchTextField.resignFirstResponder()
+        let cityToSearch = dataManager.listOfSearchedCityNames[indexPath.row]
+        dataManager.fetchData(cityToSearch.name)
+        hideSearchStack()
         }
     
     
@@ -51,7 +44,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         if editingStyle == .delete {
             dataManager.listOfSearchedCityNames.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            dataManager.updateData()
+            dataManager.saveData()
         }
     }
 }

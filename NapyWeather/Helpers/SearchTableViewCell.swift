@@ -20,7 +20,7 @@ class SearchTableViewCell: UITableViewCell {
         guard let superview = self.superview as? UITableView else { return }
         guard let indexPath = superview.indexPath(for: self) else { return }
         dataManager.listOfSearchedCityNames[indexPath.row].isFavorite.toggle()
-        dataManager.updateData()
+        dataManager.saveData()
         superview.reloadData()
     }
 }
