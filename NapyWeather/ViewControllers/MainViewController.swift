@@ -66,7 +66,7 @@ class MainViewController: UIViewController {
         dayProgresSlider.layer.borderColor = color
         
         searchTextField.returnKeyType = .search
-        
+        dataManager.loadSettings()
         dataManager.loadData()
         
         isDataLoaded()
@@ -165,6 +165,7 @@ class MainViewController: UIViewController {
         dataManager.fetchData(inputSrting)
     }
     
+    @IBAction func unwindeToFirst(_ sender: UIStoryboardSegue) {}
 }
 
     

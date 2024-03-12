@@ -11,9 +11,11 @@ import CoreLocation
 class DataManager {
     
     var listOfSearchedCityNames: [Citys] = []
-    var language = "ru"
-    var scale = "°С"
+    var language = "Английский"
+    var languageID = "en"
+    var scale = "°C"
     var unit = "metric"
+    var settings: Settings!
 
     
     static let shared = DataManager()
@@ -23,7 +25,8 @@ class DataManager {
     
     
     func fetchData(_ city: String) {
-        let url = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=\(APIKey)&units=\(unit)&lang=\(language)"
+        let url = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=\(APIKey)&units=\(unit)&lang=\(languageID)"
+        print(url)
         guard let url = URL(string: url) else { return }
         let dataTask = URLSession.shared.dataTask(with: url) { (data, responce, error) in
             guard let data = data, error == nil else { return }
@@ -40,7 +43,8 @@ class DataManager {
     }
     
     func fetchDataByCoordinate(_ latitude: String, _ longitude: String) {
-        let url = "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&appid=\(APIKey)&units=\(unit)&lang=\(language)"
+        let url = "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&appid=\(APIKey)&units=\(unit)&lang=\(languageID)"
+        print(url)
         guard let url = URL(string: url) else { return }
         let dataTask = URLSession.shared.dataTask(with: url) { (data, responce, error) in
             guard let data = data, error == nil else { return }
@@ -55,7 +59,8 @@ class DataManager {
     }
     
     func fetchLast(_ city: String) {
-        let url = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=\(APIKey)&units=\(unit)&lang=\(language)"
+        let url = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=\(APIKey)&units=\(unit)&lang=\(languageID)"
+        print(url)
         guard let url = URL(string: url) else { return }
         let dataTask = URLSession.shared.dataTask(with: url) { (data, responce, error) in
             guard let data = data, error == nil else { return }
@@ -77,7 +82,7 @@ class DataManager {
         var counter = 0
         
         for city in filteredFavorites {
-                let url = "https://api.openweathermap.org/data/2.5/weather?q=\(city.name)&appid=\(APIKey)&units=\(unit)&lang=\(language)"
+                let url = "https://api.openweathermap.org/data/2.5/weather?q=\(city.name)&appid=\(APIKey)&units=\(unit)&lang=\(languageID)"
             print(url)
                 guard let url = URL(string: url) else { return }
                 let dataTask = URLSession.shared.dataTask(with: url) { (data, responce, error) in
@@ -144,6 +149,28 @@ class DataManager {
         fetchLast(name)
         print(decodedCityNames, "is loaded")
     }
+    
+    func saveSettings() {
+        let save = Settings(language: language, languageID: languageID, scale: scale, unit: unit)
+        guard let encodeData = try? JSONEncoder().encode(save) else { return }
+        UserDefaults.standard.setValue(encodeData, forKey: "settings")
+        print(encodeData, "settings")
+    }
+    
+    func loadSettings() {
+        guard let decodedSettings = UserDefaults.standard.object(forKey: "settings") as? Data else {
+            return
+        }
+        guard let settings = try? JSONDecoder().decode(Settings.self,
+                                                         from: decodedSettings) else { return }
+        languageID = settings.languageID
+        language = settings.language
+        scale = settings.scale
+        unit = settings.unit
+        
+        print(decodedSettings, "settings")
+    }
+    
 }
 
 

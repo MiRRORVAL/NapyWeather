@@ -621,7 +621,7 @@
         <scene sceneID="Jm5-e3-R6M">
             <objects>
                 <tableViewController id="Nfa-Ka-7lz" customClass="SettingsTableViewController" customModule="NapyWeather" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="6WE-sv-JPp">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="static" style="insetGrouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="6WE-sv-JPp">
                         <rect key="frame" x="0.0" y="0.0" width="430" height="922"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.21960784310000001" green="0.2274509804" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -642,8 +642,8 @@
                                                     <color key="textColor" systemColor="systemYellowColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" role="primary" translatesAutoresizingMaskIntoConstraints="NO" id="fke-O0-WoT">
-                                                    <rect key="frame" x="292" y="4.6666666666666679" width="88" height="34.333333333333329"/>
+                                                <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fke-O0-WoT">
+                                                    <rect key="frame" x="294.33333333333331" y="4.6666666666666679" width="85.666666666666686" height="34.333333333333329"/>
                                                     <color key="tintColor" systemColor="systemYellowColor"/>
                                                     <menu key="menu" id="3tc-3H-A5H">
                                                         <menuOptions key="menuOptions" singleSelection="YES"/>
@@ -705,84 +705,10 @@
                                 </cells>
                             </tableViewSection>
                             <tableViewSection id="VoJ-Lc-ip0">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="40" id="ZtF-wC-6ca">
-                                        <rect key="frame" x="20" y="141.33333587646484" width="390" height="43.666667938232422"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZtF-wC-6ca" id="6JD-Wk-IZp">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aMO-gI-Cc4">
-                                                    <rect key="frame" x="25" y="11.333333333333336" width="42" height="21"/>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" systemColor="systemYellowColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VIM-rH-hbq">
-                                                    <rect key="frame" x="324" y="7" width="46" height="30"/>
-                                                    <color key="tintColor" systemColor="systemYellowColor"/>
-                                                    <menu key="menu" id="5qH-aZ-UyT">
-                                                        <children>
-                                                            <command title="Item 1" id="IRR-b4-gKI"/>
-                                                            <command title="Item 2" id="XZz-rz-oy8"/>
-                                                        </children>
-                                                    </menu>
-                                                    <state key="normal" title="Button"/>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="VIM-rH-hbq" firstAttribute="centerY" secondItem="6JD-Wk-IZp" secondAttribute="centerY" id="54s-Er-KQU"/>
-                                                <constraint firstAttribute="trailing" secondItem="VIM-rH-hbq" secondAttribute="trailing" constant="20" symbolic="YES" id="Ofk-iY-xnv"/>
-                                                <constraint firstItem="VIM-rH-hbq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="aMO-gI-Cc4" secondAttribute="trailing" constant="10" id="PF8-o9-LLG"/>
-                                                <constraint firstItem="aMO-gI-Cc4" firstAttribute="centerY" secondItem="6JD-Wk-IZp" secondAttribute="centerY" id="jSw-73-Gus"/>
-                                                <constraint firstItem="aMO-gI-Cc4" firstAttribute="leading" secondItem="6JD-Wk-IZp" secondAttribute="leadingMargin" constant="5" id="qQs-gn-9pM"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.43516833372790403" green="0.4534912109375" blue="0.4534912109375" alpha="0.96535560344827587" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </tableViewCell>
-                                </cells>
+                                <cells/>
                             </tableViewSection>
                             <tableViewSection id="2t8-4w-l4i">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="40" id="dkt-tq-5sA">
-                                        <rect key="frame" x="20" y="221.00000381469727" width="390" height="43.666667938232422"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dkt-tq-5sA" id="biD-Kz-3FS">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jP4-Bk-nwT">
-                                                    <rect key="frame" x="25" y="11.333333333333336" width="42" height="21"/>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" systemColor="systemYellowColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IV9-YJ-WdA">
-                                                    <rect key="frame" x="324" y="7" width="46" height="30"/>
-                                                    <color key="tintColor" systemColor="systemYellowColor"/>
-                                                    <menu key="menu" id="VBv-Xs-vcN">
-                                                        <children>
-                                                            <command title="Item 1" id="emf-Fh-yIK"/>
-                                                            <command title="Item 2" id="4Vc-0W-2y8"/>
-                                                        </children>
-                                                    </menu>
-                                                    <state key="normal" title="Button"/>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="jP4-Bk-nwT" firstAttribute="centerY" secondItem="biD-Kz-3FS" secondAttribute="centerY" id="EHD-Gt-Rwy"/>
-                                                <constraint firstItem="jP4-Bk-nwT" firstAttribute="leading" secondItem="biD-Kz-3FS" secondAttribute="leadingMargin" constant="5" id="Nwf-K8-cH6"/>
-                                                <constraint firstAttribute="trailing" secondItem="IV9-YJ-WdA" secondAttribute="trailing" constant="20" symbolic="YES" id="T4v-rd-v36"/>
-                                                <constraint firstItem="IV9-YJ-WdA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="jP4-Bk-nwT" secondAttribute="trailing" constant="10" id="ejU-2y-m7x"/>
-                                                <constraint firstItem="IV9-YJ-WdA" firstAttribute="centerY" secondItem="biD-Kz-3FS" secondAttribute="centerY" id="mAw-Vz-rTN"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.43516833372790403" green="0.4534912109375" blue="0.4534912109375" alpha="0.96535560344827587" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </tableViewCell>
-                                </cells>
+                                <cells/>
                             </tableViewSection>
                         </sections>
                         <connections>
@@ -793,8 +719,6 @@
                     <navigationItem key="navigationItem" title="Настройки" style="editor" id="Pq9-I8-xiA"/>
                     <connections>
                         <outlet property="languageButton" destination="fke-O0-WoT" id="k4l-dV-4Dt"/>
-                        <outlet property="languageSelector" destination="fke-O0-WoT" id="cxY-jU-ORm"/>
-                        <outlet property="unitSelector" destination="UOY-ln-yc2" id="BcW-xT-Jro"/>
                         <outlet property="unitsButton" destination="UOY-ln-yc2" id="wiU-km-AHV"/>
                     </connections>
                 </tableViewController>
