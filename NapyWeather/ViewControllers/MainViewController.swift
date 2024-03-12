@@ -80,7 +80,7 @@ class MainViewController: UIViewController {
         searchStackView.isHidden = true
         searchHistoryTableView.isHidden = true
         let image = UIImage(systemName: "magnifyingglass")
-        self.navigationItem.rightBarButtonItem?.image = image
+        self.navigationItem.leftBarButtonItem?.image = image
         self.searchTextField.text = .none
         self.searchTextField.resignFirstResponder()
     }
@@ -92,7 +92,7 @@ class MainViewController: UIViewController {
         } else {
             UIView.animate(withDuration: 0.5, delay: 0) {
                 let image = UIImage(systemName: "xmark.app")
-                self.navigationItem.rightBarButtonItem?.image = image
+                self.navigationItem.leftBarButtonItem?.image = image
                 self.searchTextField.becomeFirstResponder()
                 if !self.dataManager.listOfSearchedCityNames.isEmpty {
                     self.searchHistoryTableView.isHidden = false
@@ -149,6 +149,9 @@ class MainViewController: UIViewController {
     @IBAction func searchButtonPressed(_ sender: UIButton) {
         searchIsStarted()
     }
+    @IBAction func openSettingsButtonePushed(_ sender: UIButton) {
+        performSegue(withIdentifier: "openSettings", sender: nil)
+    }
     
     @IBAction func gotoTheBookmarkTableViewBattonePressed(_ sender: UIBarButtonItem) {
         dataManager.fetchAllBookmarkedCitys()
@@ -161,6 +164,8 @@ class MainViewController: UIViewController {
         guard let inputSrting = searchTextField.text, inputSrting != "" else { return }
         dataManager.fetchData(inputSrting)
     }
+    
 }
+
     
 
