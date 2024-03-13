@@ -18,7 +18,7 @@ class SettingsTableViewController: UITableViewController {
         super.viewDidLoad()
         setUnitsButton()
         setLanguageButton()
-        
+        tableView.rowHeight = 50
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -47,9 +47,9 @@ class SettingsTableViewController: UITableViewController {
         
         for selection in unitsList.keys {
             if selection == dataMeneger.scale {
-                resaltList.insert(UIAction(title: dataMeneger.scale, image: checkmarkImage, state: .on, handler: optionClosure), at: 0)
+                resaltList.insert(UIAction(title: dataMeneger.scale, image: image, state: .on, handler: optionClosure), at: 0)
             } else {
-                resaltList.append(UIAction(title: selection, image: image, handler: optionClosure))
+                resaltList.append(UIAction(title: selection, image: checkmarkImage, handler: optionClosure))
             }
         }
         self.unitsButton.menu = UIMenu (children : resaltList)
@@ -71,9 +71,9 @@ class SettingsTableViewController: UITableViewController {
         
         for selection in languagesList.keys {
             if selection == dataMeneger.language {
-                resaltList.insert(UIAction(title: dataMeneger.language, image: checkmarkImage, state: .on, handler: optionClosure), at: 0)
+                resaltList.insert(UIAction(title: dataMeneger.language, image: image, state: .on, handler: optionClosure), at: 0)
             } else {
-                resaltList.append(UIAction(title: selection, image: image, handler: optionClosure))
+                resaltList.append(UIAction(title: selection, image: checkmarkImage, handler: optionClosure))
             }
         }
         self.languageButton.menu = UIMenu (children : resaltList)

@@ -17,6 +17,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SearchTableViewCell
         searchHistoryTableView.separatorColor = .white
+        tableView.rowHeight = 40
         cell.cityNameLable.textColor = .white
         cell.cityNameLable?.text = dataManager.listOfSearchedCityNames[indexPath.row].name
         cell.cellFavoriteBattone.tintColor = .white
@@ -29,6 +30,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
         return cell
     }
+    
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
