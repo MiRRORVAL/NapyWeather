@@ -13,3 +13,4 @@ struct Settings: Codable, Hashable {
     let scale: String
     var unit: String
 }
+
