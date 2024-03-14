@@ -38,7 +38,7 @@ class MainViewController: UIViewController {
     
     var replicator: CAReplicatorLayer!
     var sourceLayer: CALayer!
-    
+    let alert = AlertController.showAlert
     let dataManager = DataManager.shared
     lazy var locationManager: CLLocationManager = {
         let locationManager = CLLocationManager()
@@ -50,26 +50,25 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         searchStackView.isHidden = true
         baseStackView.isHidden = true
         searchHistoryTableView.isHidden = true
-        
         searchHistoryTableView.delegate = self
         searchHistoryTableView.dataSource = self
         dataManager.delegateByProtocol = self
+        
         searchHistoryTableView.layer.borderWidth = 2
         searchHistoryTableView.layer.borderColor = CGColor(gray: 0.5, alpha: 0.2)
         dayProgresSlider.layer.cornerRadius = 100
         dayProgresSlider.layer.borderWidth = 15
         let color = UIColor.init(red: 1, green: 1, blue: 0.5, alpha: 0.1).cgColor
         dayProgresSlider.layer.borderColor = color
-        
         searchTextField.returnKeyType = .search
-        dataManager.loadSettings()
-        dataManager.loadData()
         
-        isDataLoaded()
+        dataManager.loadSettings()
+        if !dataManager.loadData() {
+            searchLocation()
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -97,34 +96,6 @@ class MainViewController: UIViewController {
                 if !self.dataManager.listOfSearchedCityNames.isEmpty {
                     self.searchHistoryTableView.isHidden = false
                 }
-            }
-        }
-    }
-    
-    func isDataLoaded() {
-        if dataManager.listOfSearchedCityNames.isEmpty {
-            searchLocation()
-        }
-    }
-    
-    func showAlert(_ text: String) {
-        let alert = UIAlertController(title: "Ошибка",
-                                      message: text,
-                                      preferredStyle: .alert)
-        let action = UIAlertAction(title: "Ok", style: .default)
-        alert.addAction(action)
-        present(alert, animated: true)
-    }
-    
-    func searchLocation() {
-        DispatchQueue.global().async {
-            CLLocationManager.locationServicesEnabled()
-            if CLLocationManager.locationServicesEnabled() {
-                DispatchQueue.main.async {
-                    self.checkLocationAuthorization()
-                }
-            } else {
-                self.showAlert("Не получено разрешение на использование геопозиции от пользователя")
             }
         }
     }

@@ -14,12 +14,13 @@ class LoginViewController: UIViewController {
     @IBOutlet var welcomeLable: UILabel!
     @IBOutlet var welcomeStackView: UIStackView!
     @IBOutlet var loginStackView: UIStackView!
-    
     @IBOutlet var loginTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var repeatPaswordTextField: UITextField!
     @IBOutlet var loginButton: UIButton!
     @IBOutlet var signupButton: UIButton!
+    
+    let alert = AlertController.showAlert
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,57 +39,60 @@ class LoginViewController: UIViewController {
 
     @IBAction func loginButtonPressed(_ sender: UIButton) {
         guard let loginText = loginTextField.text, loginText != "" else {
-            print("Login is empty")
+            present(alert("Login field is empty"), animated: true)
             return }
         guard let passwordText = passwordTextField.text, passwordText != ""  else {
-            print("Password is empty")
+            present(alert("Password field is empty"), animated: true)
             return }
         Auth.auth().signIn(withEmail: loginText, password: passwordText) { user, error in
             if let error = error {
-                print(error)
+                self.present(self.alert("\(error.localizedDescription)"), animated: true)
             } else {
-                print(user?.user.email ?? "")
-                self.welcomeStackView.isHidden = false
-                self.loginStackView.isHidden = true
+                self.switchStackViews()
                 self.welcomeLable.text = "\(user?.user.email ?? "")"
             }
         }
     }
     
     @IBAction func signupButtonPressed(_ sender: UIButton) {
-        repeatPaswordTextField.isHidden = false
-        guard let loginText = loginTextField.text, loginText != "" else {
-            print("Login is empty")
-            return
-        }
-        guard let passwordText = passwordTextField.text, passwordText != "" else {
-            print("Password is empty")
-            return
-        }
-        guard let repeatPasswordText = repeatPaswordTextField.text, repeatPasswordText != "" else {
-            print("Password 2 is empty")
-            return
-        }
-        guard passwordText == repeatPasswordText else {
-            print("Password 1 and 2 not equal")
-            return
-        }
-        Auth.auth().createUser(withEmail: loginText, password: passwordText) { user, error in
-            if let error = error {
-                print(error)
-            } else {
-                self.welcomeStackView.isHidden = false
-                self.loginStackView.isHidden = true
-                self.welcomeLable.text = "\(user?.user.email ?? "")"
+        if repeatPaswordTextField.isHidden != false {
+            repeatPaswordTextField.isHidden = false
+        } else {
+            guard let loginText = loginTextField.text, loginText != "" else {
+                present(alert("Login field is empty"), animated: true)
+                return
+            }
+            guard let passwordText = passwordTextField.text, passwordText != "" else {
+                present(alert("Password field is empty"), animated: true)
+                return
+            }
+            guard let repeatPasswordText = repeatPaswordTextField.text, repeatPasswordText != "" else {
+                present(alert("Please comfirm password"), animated: true)
+                return
+            }
+            guard passwordText == repeatPasswordText else {
+                present(alert("Password 1 and 2 are not equal"), animated: true)
+                return
+            }
+            Auth.auth().createUser(withEmail: loginText, password: passwordText) { user, error in
+                if let error = error {
+                    self.present(self.alert("\(error.localizedDescription)"), animated: true)
+                } else {
+                    self.switchStackViews()
+                    self.welcomeLable.text = "\(user?.user.email ?? "")"
+                }
             }
         }
     }
     
-        @IBAction func logoutButtonPressed(_ sender: UIButton) {
-            welcomeStackView.isHidden = true
-            loginStackView.isHidden = false
+    @IBAction func logoutButtonPressed(_ sender: UIButton) {
+            switchStackViews()
             try! Auth.auth().signOut()
         }
     
+    func switchStackViews() {
+        welcomeStackView.isHidden.toggle()
+        loginStackView.isHidden.toggle()
+    }
 
 }

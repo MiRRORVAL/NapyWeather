@@ -54,6 +54,7 @@
 		496713CA2BA2FC9C0043EA9A /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 496713C92BA2FC9C0043EA9A /* FirebaseRemoteConfigSwift */; };
 		496713CC2BA2FC9C0043EA9A /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 496713CB2BA2FC9C0043EA9A /* FirebaseStorage */; };
 		496713CE2BA2FC9C0043EA9A /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 496713CD2BA2FC9C0043EA9A /* FirebaseStorageCombine-Community */; };
+		496713D02BA31A450043EA9A /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496713CF2BA31A450043EA9A /* AlertController.swift */; };
 		496F53562B7699AC008DD1D3 /* Extention + MainVC(ShereDataProtocol).swift in Sources */ = {isa = PBXBuildFile; fileRef = 496F53552B7699AC008DD1D3 /* Extention + MainVC(ShereDataProtocol).swift */; };
 		49C28FCB2B7A739C00DA648F /* CityNameWithDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C28FCA2B7A739C00DA648F /* CityNameWithDate.swift */; };
 		49F4C07C2BA22A140012BD47 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49F4C07B2BA22A140012BD47 /* GoogleService-Info.plist */; };
@@ -87,6 +88,7 @@
 		4965B8EB2B73E2510008EB2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4965B8ED2B73E2510008EB2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		496713972BA2F0530043EA9A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		496713CF2BA31A450043EA9A /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		496F53552B7699AC008DD1D3 /* Extention + MainVC(ShereDataProtocol).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extention + MainVC(ShereDataProtocol).swift"; sourceTree = "<group>"; };
 		49C28FCA2B7A739C00DA648F /* CityNameWithDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityNameWithDate.swift; sourceTree = "<group>"; };
 		49F4C07B2BA22A140012BD47 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 			children = (
 				495681602B7523FE00EC62DB /* DataManager.swift */,
 				496330952B7B544800222577 /* SearchTableViewCell.swift */,
+				496713CF2BA31A450043EA9A /* AlertController.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 				496F53562B7699AC008DD1D3 /* Extention + MainVC(ShereDataProtocol).swift in Sources */,
 				4956816B2B752FF500EC62DB /* APIKey.swift in Sources */,
 				495681632B75244900EC62DB /* WeatherRightNowJSON.swift in Sources */,
+				496713D02BA31A450043EA9A /* AlertController.swift in Sources */,
 				4956816E2B7530E600EC62DB /* ShareWeatherDataProtocol.swift in Sources */,
 				49C28FCB2B7A739C00DA648F /* CityNameWithDate.swift in Sources */,
 				49637E602B7CFD4D00AB68DE /* Extention + MainVC(Source and delegate).swift in Sources */,

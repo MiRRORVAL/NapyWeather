@@ -22,7 +22,6 @@ class TableViewController: UITableViewController {
         activityIndicator.hidesWhenStopped = true
     }
 
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return citys.count
     }
@@ -36,10 +35,6 @@ class TableViewController: UITableViewController {
             activityIndicator.stopAnimating()
         }
         return cell
-    }
-    
-    @IBAction func goToTheSettingsButtonPressed(_ sender: UIBarButtonItem) {
-        
     }
 }
 

@@ -8,6 +8,7 @@
 import UIKit
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let counter = dataManager.listOfSearchedCityNames.count
         return counter

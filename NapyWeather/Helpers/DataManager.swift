@@ -55,8 +55,9 @@ class DataManager {
         dataTask.resume()
     }
     
-    func fetchLast(_ city: String) {
-        let url = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=\(APIKey)&units=\(unit)&lang=\(languageID)"
+    func fetchLast() {
+        guard let lastcity = listOfSearchedCityNames.first?.name else { return }
+        let url = "https://api.openweathermap.org/data/2.5/weather?q=\(lastcity)&appid=\(APIKey)&units=\(unit)&lang=\(languageID)"
         guard let url = URL(string: url) else { return }
         let dataTask = URLSession.shared.dataTask(with: url) { (data, responce, error) in
             guard let data = data, error == nil else { return }
@@ -132,17 +133,18 @@ class DataManager {
         print(dataEncodedCitys, "is updated")
     }
     
-    func loadData() {
+    func loadData() -> Bool {
         guard let decodedCityNames = UserDefaults.standard.object(forKey: "listOfCityNames") as? Data else {
-            print("First strt")
-            return
+            print("First start")
+            return false
         }
-        guard let cityNames = try? JSONDecoder().decode([Citys].self,
-                                                         from: decodedCityNames) else { return }
+        guard let cityNames = try? JSONDecoder().decode([Citys].self, from: decodedCityNames) else {
+            return false
+        }
         sortSearchedValues(cityNames)
-        guard let name = listOfSearchedCityNames.first?.name else { return }
-        fetchLast(name)
+        fetchLast()
         print(decodedCityNames, "is loaded")
+        return true
     }
     
     func saveSettings() {
