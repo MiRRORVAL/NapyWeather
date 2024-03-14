@@ -26,6 +26,7 @@
 		4965B8E42B73E2500008EB2C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4965B8E32B73E2500008EB2C /* MainViewController.swift */; };
 		4965B8E72B73E2500008EB2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4965B8E52B73E2500008EB2C /* Main.storyboard */; };
 		4965B8EC2B73E2510008EB2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4965B8EA2B73E2510008EB2C /* LaunchScreen.storyboard */; };
+		496713982BA2F0530043EA9A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496713972BA2F0530043EA9A /* LoginViewController.swift */; };
 		496F53562B7699AC008DD1D3 /* Extention + MainVC(ShereDataProtocol).swift in Sources */ = {isa = PBXBuildFile; fileRef = 496F53552B7699AC008DD1D3 /* Extention + MainVC(ShereDataProtocol).swift */; };
 		49C28FCB2B7A739C00DA648F /* CityNameWithDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C28FCA2B7A739C00DA648F /* CityNameWithDate.swift */; };
 		49F4C07C2BA22A140012BD47 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49F4C07B2BA22A140012BD47 /* GoogleService-Info.plist */; };
@@ -58,6 +59,7 @@
 		4965B8E62B73E2500008EB2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4965B8EB2B73E2510008EB2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4965B8ED2B73E2510008EB2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		496713972BA2F0530043EA9A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		496F53552B7699AC008DD1D3 /* Extention + MainVC(ShereDataProtocol).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extention + MainVC(ShereDataProtocol).swift"; sourceTree = "<group>"; };
 		49C28FCA2B7A739C00DA648F /* CityNameWithDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityNameWithDate.swift; sourceTree = "<group>"; };
 		49F4C07B2BA22A140012BD47 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				4956816F2B75379900EC62DB /* TableViewController.swift */,
 				49637E612B7CFE1600AB68DE /* Extention + TableVC(ShareWeatherDataListProtocol).swift */,
 				496478F12BA04F6100521EBF /* SettingsTableViewController.swift */,
+				496713972BA2F0530043EA9A /* LoginViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				49637E622B7CFE1600AB68DE /* Extention + TableVC(ShareWeatherDataListProtocol).swift in Sources */,
 				4965B8E42B73E2500008EB2C /* MainViewController.swift in Sources */,
 				495681612B7523FE00EC62DB /* DataManager.swift in Sources */,
+				496713982BA2F0530043EA9A /* LoginViewController.swift in Sources */,
 				4965B8E02B73E2500008EB2C /* AppDelegate.swift in Sources */,
 				495681702B75379900EC62DB /* TableViewController.swift in Sources */,
 				496478F42BA0BFA300521EBF /* Settings.swift in Sources */,

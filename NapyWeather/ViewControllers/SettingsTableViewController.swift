@@ -41,15 +41,15 @@ class SettingsTableViewController: UITableViewController {
             self.setUnitsButton()
         }
         
-        let image = UIImage(systemName: "poweroff")?.withTintColor(.yellow, renderingMode: .alwaysOriginal)
-        let checkmarkImage = UIImage(systemName: "poweroff")?.withTintColor(.yellow, renderingMode: .alwaysTemplate)
+        let image = UIImage(systemName: "circle.dotted.circle")?.withTintColor(.yellow, renderingMode: .alwaysOriginal)
+        let checkmarkImage = UIImage(systemName: "circle.dotted.circle.fill")?.withTintColor(.yellow, renderingMode: .alwaysOriginal)
         
         
         for selection in unitsList.keys {
             if selection == dataMeneger.scale {
-                resaltList.insert(UIAction(title: dataMeneger.scale, image: image, state: .on, handler: optionClosure), at: 0)
+                resaltList.insert(UIAction(title: dataMeneger.scale, image: checkmarkImage, state: .on, handler: optionClosure), at: 0)
             } else {
-                resaltList.append(UIAction(title: selection, image: checkmarkImage, handler: optionClosure))
+                resaltList.append(UIAction(title: selection, image: image, handler: optionClosure))
             }
         }
         self.unitsButton.menu = UIMenu (children : resaltList)
@@ -66,14 +66,14 @@ class SettingsTableViewController: UITableViewController {
             self.setLanguageButton()
         }
         
-        let image = UIImage(systemName: "poweroff")?.withTintColor(.yellow, renderingMode: .alwaysOriginal)
-        let checkmarkImage = UIImage(systemName: "poweroff")?.withTintColor(.yellow, renderingMode: .alwaysTemplate)
+        let image = UIImage(systemName: "circle.dotted.circle")?.withTintColor(.yellow, renderingMode: .alwaysOriginal)
+        let checkmarkImage = UIImage(systemName: "circle.dotted.circle.fill")?.withTintColor(.yellow, renderingMode: .alwaysOriginal)
         
         for selection in languagesList.keys {
             if selection == dataMeneger.language {
-                resaltList.insert(UIAction(title: dataMeneger.language, image: image, state: .on, handler: optionClosure), at: 0)
+                resaltList.insert(UIAction(title: dataMeneger.language, image: checkmarkImage, state: .on, handler: optionClosure), at: 0)
             } else {
-                resaltList.append(UIAction(title: selection, image: checkmarkImage, handler: optionClosure))
+                resaltList.append(UIAction(title: selection, image: image, handler: optionClosure))
             }
         }
         self.languageButton.menu = UIMenu (children : resaltList)
@@ -81,6 +81,7 @@ class SettingsTableViewController: UITableViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         dataMeneger.saveSettings()
+        dataMeneger.loadData()
     }
 }
 

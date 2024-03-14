@@ -184,7 +184,7 @@
                                                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain">
-                                                                    <imageReference key="image" image="gearshape" catalog="system" symbolScale="medium"/>
+                                                                    <imageReference key="image" image="gearshape" catalog="system" symbolScale="large"/>
                                                                 </buttonConfiguration>
                                                                 <connections>
                                                                     <action selector="openSettingsButtonePushed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tmm-hX-ChC"/>
@@ -546,7 +546,7 @@
                         <outlet property="weatherDescriptionLable" destination="oYm-N6-X7C" id="2Jv-yr-Vsv"/>
                         <outlet property="windSpeedLable" destination="TlT-K0-j7D" id="lL2-2M-0H6"/>
                         <segue destination="btB-3l-pe7" kind="show" identifier="goTwo" id="GiJ-wY-Oxf"/>
-                        <segue destination="Nfa-Ka-7lz" kind="showDetail" identifier="openSettings" id="QL1-9K-bSN"/>
+                        <segue destination="Nfa-Ka-7lz" kind="show" identifier="openSettings" id="QL1-9K-bSN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -622,7 +622,7 @@
             <objects>
                 <tableViewController id="Nfa-Ka-7lz" customClass="SettingsTableViewController" customModule="NapyWeather" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="static" style="insetGrouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="6WE-sv-JPp">
-                        <rect key="frame" x="0.0" y="0.0" width="430" height="922"/>
+                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.21960784310000001" green="0.2274509804" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <sections>
@@ -642,9 +642,10 @@
                                                     <color key="textColor" systemColor="systemYellowColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fke-O0-WoT">
-                                                    <rect key="frame" x="294.33333333333331" y="4.6666666666666679" width="85.666666666666686" height="34.333333333333329"/>
+                                                <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" springLoaded="YES" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fke-O0-WoT">
+                                                    <rect key="frame" x="294.33333333333331" y="5" width="85.666666666666686" height="34"/>
                                                     <color key="tintColor" systemColor="systemYellowColor"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <menu key="menu" id="3tc-3H-A5H">
                                                         <menuOptions key="menuOptions" singleSelection="YES"/>
                                                         <children>
@@ -652,7 +653,7 @@
                                                         </children>
                                                     </menu>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="gray"/>
+                                                    <buttonConfiguration key="configuration" style="filled" title="Button"/>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" red="0.21960784310000001" green="0.2274509804" blue="0.2274509804" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -689,7 +690,7 @@
                                                             <command title="Item 1" id="HcM-Xg-xCX"/>
                                                         </children>
                                                     </menu>
-                                                    <buttonConfiguration key="configuration" style="gray"/>
+                                                    <buttonConfiguration key="configuration" style="filled"/>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -716,7 +717,13 @@
                             <outlet property="delegate" destination="Nfa-Ka-7lz" id="gFn-vk-C1d"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Настройки" style="editor" id="Pq9-I8-xiA"/>
+                    <navigationItem key="navigationItem" title="Настройки" style="editor" id="Pq9-I8-xiA">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="arrow.triangle.2.circlepath.circle.fill" catalog="system" style="done" id="kwL-fv-xLF">
+                            <connections>
+                                <segue destination="wWr-y1-ZF3" kind="show" id="vIw-rP-Aw3"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="languageButton" destination="fke-O0-WoT" id="k4l-dV-4Dt"/>
                         <outlet property="unitsButton" destination="UOY-ln-yc2" id="wiU-km-AHV"/>
@@ -725,6 +732,88 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bka-gQ-jTo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2287" y="783"/>
+        </scene>
+        <!--Синхронизация-->
+        <scene sceneID="SxO-5Z-xra">
+            <objects>
+                <viewController id="wWr-y1-ZF3" customClass="LoginViewController" customModule="NapyWeather" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5Ue-67-gGh">
+                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="EYz-iE-TqT">
+                                <rect key="frame" x="80" y="153" width="270" height="257"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Синхронизировать настройки и закладки?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="stw-u9-l8h">
+                                        <rect key="frame" x="0.0" y="0.0" width="270" height="40.666666666666664"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" systemColor="systemYellowColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vpr-xg-sJB">
+                                        <rect key="frame" x="0.0" y="60.666666666666657" width="270" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Zn-S4-3bl">
+                                        <rect key="frame" x="0.0" y="114.66666666666669" width="270" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="W9L-WP-6b7">
+                                        <rect key="frame" x="0.0" y="168.66666666666669" width="270" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="lX1-hj-gO9">
+                                        <rect key="frame" x="0.0" y="222.66666666666669" width="270" height="34.333333333333314"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pgF-Yr-sbh">
+                                                <rect key="frame" x="0.0" y="0.0" width="125" height="34.333333333333336"/>
+                                                <color key="tintColor" systemColor="systemYellowColor"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Login">
+                                                    <color key="baseBackgroundColor" red="0.68756103515625" green="0.5495318125119566" blue="0.0040809345376434485" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="loginButtonPressed:" destination="8uq-55-LCA" eventType="touchUpInside" id="eqg-bn-dwn"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qRk-oZ-XAh">
+                                                <rect key="frame" x="145" y="0.0" width="125" height="34.333333333333336"/>
+                                                <color key="tintColor" systemColor="systemYellowColor"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="tinted" title="Sign up">
+                                                    <color key="baseBackgroundColor" red="0.838623046875" green="0.7647908006259454" blue="0.40585832322030968" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="signupButtonPressed:" destination="8uq-55-LCA" eventType="touchUpInside" id="vLP-Ku-11G"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="MZY-a7-V0d"/>
+                        <color key="backgroundColor" red="0.21960784310000001" green="0.2274509804" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="EYz-iE-TqT" firstAttribute="top" secondItem="MZY-a7-V0d" secondAttribute="top" constant="50" id="nsF-f0-hxS"/>
+                            <constraint firstItem="EYz-iE-TqT" firstAttribute="leading" secondItem="MZY-a7-V0d" secondAttribute="leading" constant="80" id="o7U-dc-Fln"/>
+                            <constraint firstItem="MZY-a7-V0d" firstAttribute="trailing" secondItem="EYz-iE-TqT" secondAttribute="trailing" constant="80" id="su9-9d-IIO"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Синхронизация" id="feV-Fo-SY4"/>
+                    <connections>
+                        <outlet property="loginButton" destination="pgF-Yr-sbh" id="Mqo-7l-Hox"/>
+                        <outlet property="loginTextField" destination="Vpr-xg-sJB" id="6XC-EZ-CrQ"/>
+                        <outlet property="passwordTextField" destination="5Zn-S4-3bl" id="35V-8Y-dlO"/>
+                        <outlet property="repeatPaswordTextField" destination="W9L-WP-6b7" id="Osl-N1-Bnh"/>
+                        <outlet property="signupButton" destination="qRk-oZ-XAh" id="Dvd-pj-aDp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8uq-55-LCA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3073.953488372093" y="782.83261802575112"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="A1x-lH-Z23">
@@ -753,6 +842,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow.triangle.2.circlepath.circle.fill" catalog="system" width="128" height="123"/>
         <image name="arrow.uturn.down.square" catalog="system" width="128" height="114"/>
         <image name="clock" catalog="system" width="128" height="123"/>
         <image name="drop" catalog="system" width="96" height="128"/>
