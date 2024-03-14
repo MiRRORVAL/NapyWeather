@@ -42,7 +42,7 @@ class SettingsTableViewController: UITableViewController {
         }
         
         let image = UIImage(systemName: "circle.dotted.circle")?.withTintColor(.yellow, renderingMode: .alwaysOriginal)
-        let checkmarkImage = UIImage(systemName: "circle.dotted.circle.fill")?.withTintColor(.yellow, renderingMode: .alwaysOriginal)
+        let checkmarkImage = UIImage(systemName: "circle.dotted.circle.fill")?.withTintColor(.yellow, renderingMode: .alwaysTemplate)
         
         
         for selection in unitsList.keys {
@@ -67,7 +67,7 @@ class SettingsTableViewController: UITableViewController {
         }
         
         let image = UIImage(systemName: "circle.dotted.circle")?.withTintColor(.yellow, renderingMode: .alwaysOriginal)
-        let checkmarkImage = UIImage(systemName: "circle.dotted.circle.fill")?.withTintColor(.yellow, renderingMode: .alwaysOriginal)
+        let checkmarkImage = UIImage(systemName: "circle.dotted.circle.fill")?.withTintColor(.yellow, renderingMode: .alwaysTemplate)
         
         for selection in languagesList.keys {
             if selection == dataMeneger.language {

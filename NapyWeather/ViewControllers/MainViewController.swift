@@ -149,9 +149,6 @@ class MainViewController: UIViewController {
     @IBAction func searchButtonPressed(_ sender: UIButton) {
         searchIsStarted()
     }
-    @IBAction func openSettingsButtonePushed(_ sender: UIButton) {
-        performSegue(withIdentifier: "openSettings", sender: nil)
-    }
     
     @IBAction func gotoTheBookmarkTableViewBattonePressed(_ sender: UIBarButtonItem) {
         dataManager.fetchAllBookmarkedCitys()
