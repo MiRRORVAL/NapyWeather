@@ -7,6 +7,8 @@
 
 import UIKit
 import CoreLocation
+import FirebaseAuth
+import FirebaseDatabase
 
 class DataManager {
     
@@ -15,7 +17,6 @@ class DataManager {
     var languageID = "en"
     var scale = "°C"
     var unit = "metric"
-    var settings: Settings!
 
     
     static let shared = DataManager()
@@ -165,7 +166,32 @@ class DataManager {
         unit = settings.unit
     }
     
+    
+    func saveIntoDB() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let citys: [String : Bool] = {
+            var temporary:  [String : Bool] = [:]
+            for city in listOfSearchedCityNames {
+                temporary[city.name] = city.isFavorite
+            }
+            return temporary
+        }()
+        let settingsLayer: [String : Bool] = [language: true, unit : true]
+        var layerOne = ["citys": citys, "settings": settingsLayer]
+        let userData = [uid : layerOne]
+        Database.database().reference().child("users").updateChildValues(userData) { error, _ in
+            if let error = error {
+                print(error)
+                print("DB is NOT saved")
+//                self.present(self.alert("\(error.localizedDescription )"), animated: true)
+            } else {
+                print("DB is saved")
+            }
+        }
+    }
+    
 }
+
 
 
 

@@ -26,5 +26,7 @@
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:65482125479:ios:557faf69d2a988a3b0ab82</string>
+	<key>DATABASE_URL</key>
+	<string>https://napyweather-default-rtdb.europe-west1.firebasedatabase.app</string>
 </dict>
 </plist>

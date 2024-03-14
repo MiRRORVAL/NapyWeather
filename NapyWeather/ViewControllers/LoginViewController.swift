@@ -21,6 +21,7 @@ class LoginViewController: UIViewController {
     @IBOutlet var signupButton: UIButton!
     
     let alert = AlertController.showAlert
+    let dataMeneger = DataManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +36,6 @@ class LoginViewController: UIViewController {
             welcomeStackView.isHidden = true
         }
     }
-    
 
     @IBAction func loginButtonPressed(_ sender: UIButton) {
         guard let loginText = loginTextField.text, loginText != "" else {
@@ -50,9 +50,10 @@ class LoginViewController: UIViewController {
             } else {
                 self.switchStackViews()
                 self.welcomeLable.text = "\(user?.user.email ?? "")"
+                self.dataMeneger.saveIntoDB()
+                }
             }
         }
-    }
     
     @IBAction func signupButtonPressed(_ sender: UIButton) {
         if repeatPaswordTextField.isHidden != false {
@@ -80,6 +81,7 @@ class LoginViewController: UIViewController {
                 } else {
                     self.switchStackViews()
                     self.welcomeLable.text = "\(user?.user.email ?? "")"
+                    self.dataMeneger.saveIntoDB()
                 }
             }
         }
@@ -88,11 +90,10 @@ class LoginViewController: UIViewController {
     @IBAction func logoutButtonPressed(_ sender: UIButton) {
             switchStackViews()
             try! Auth.auth().signOut()
-        }
+    }
     
     func switchStackViews() {
         welcomeStackView.isHidden.toggle()
         loginStackView.isHidden.toggle()
     }
-
 }

@@ -38,4 +38,13 @@ class TableViewController: UITableViewController {
     }
 }
 
+extension TableViewController: ShareWeatherDataListProtocol {
+    
+    func updateTableViewWithBookmarkedCitys(_ weather: [WeatherRightNow]) {
+        citys = weather
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+}
 

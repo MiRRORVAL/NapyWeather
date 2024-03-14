@@ -69,6 +69,7 @@ class MainViewController: UIViewController {
         if !dataManager.loadData() {
             searchLocation()
         }
+        dataManager.saveIntoDB()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
