@@ -12,12 +12,9 @@ import FirebaseDatabase
 
 class DataManager {
     
-    var listOfSearchedCityNames: [Citys] = []
-    var language = "Английский"
-    var languageID = "en"
-    var scale = "°C"
-    var unit = "metric"
-
+    var listOfSearchedCityNames: [City] = []
+    var settings: Settings!
+    var wasChangedAtCurrentSession = false
     
     static let shared = DataManager()
     
@@ -26,7 +23,7 @@ class DataManager {
     
     
     func fetchData(_ city: String) {
-        let url = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=\(APIKey)&units=\(unit)&lang=\(languageID)"
+        let url = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=\(APIKey)&units=\(settings.unit)&lang=\(settings.languageID)"
         guard let url = URL(string: url) else { return }
         let dataTask = URLSession.shared.dataTask(with: url) { (data, responce, error) in
             guard let data = data, error == nil else { return }
@@ -42,7 +39,7 @@ class DataManager {
     }
     
     func fetchDataByCoordinate(_ latitude: String, _ longitude: String) {
-        let url = "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&appid=\(APIKey)&units=\(unit)&lang=\(languageID)"
+        let url = "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&appid=\(APIKey)&units=\(settings.unit)&lang=\(settings.languageID)"
         guard let url = URL(string: url) else { return }
         let dataTask = URLSession.shared.dataTask(with: url) { (data, responce, error) in
             guard let data = data, error == nil else { return }
@@ -58,7 +55,7 @@ class DataManager {
     
     func fetchLast() {
         guard let lastcity = listOfSearchedCityNames.first?.name else { return }
-        let url = "https://api.openweathermap.org/data/2.5/weather?q=\(lastcity)&appid=\(APIKey)&units=\(unit)&lang=\(languageID)"
+        let url = "https://api.openweathermap.org/data/2.5/weather?q=\(lastcity)&appid=\(APIKey)&units=\(settings.unit)&lang=\(settings.languageID)"
         guard let url = URL(string: url) else { return }
         let dataTask = URLSession.shared.dataTask(with: url) { (data, responce, error) in
             guard let data = data, error == nil else { return }
@@ -80,7 +77,7 @@ class DataManager {
         var counter = 0
         
         for city in filteredFavorites {
-                let url = "https://api.openweathermap.org/data/2.5/weather?q=\(city.name)&appid=\(APIKey)&units=\(unit)&lang=\(languageID)"
+            let url = "https://api.openweathermap.org/data/2.5/weather?q=\(city.name)&appid=\(APIKey)&units=\(settings.unit)&lang=\(settings.languageID)"
                 guard let url = URL(string: url) else { return }
                 let dataTask = URLSession.shared.dataTask(with: url) { (data, responce, error) in
                     guard let data = data, error == nil else { return }
@@ -94,14 +91,13 @@ class DataManager {
                     if counter == filteredFavorites.count - 1 {
                         self.delegateTableByProtocol?.updateTableViewWithBookmarkedCitys(weatherForAllCitys)
                     }
-                    
                     counter += 1
                 }
                 dataTask.resume()
         }
     }
     
-    func sortSearchedValues(_ list: [Citys]) {
+    func sortSearchedValues(_ list: [City]) {
         var sortedList = list
         sortedList.sort {
             $0.date > $1.date
@@ -111,27 +107,29 @@ class DataManager {
     
     func updateData(_ name: String) {
         var counter = 0
-        
         for city in listOfSearchedCityNames {
             if city.name == name {
-                let city = Citys(name: name, date: Date(), isFavorite: city.isFavorite)
+                let city = City(name: name, date: Date(), isFavorite: city.isFavorite)
                 listOfSearchedCityNames.remove(at: counter)
                 listOfSearchedCityNames.insert(city, at: 0)
                 saveData()
+                saveIntoDB()
                 return
             } else {
                 counter += 1
             }
         }
-        let city = Citys(name: name, date: Date(), isFavorite: false)
+        let city = City(name: name, date: Date(), isFavorite: false)
         listOfSearchedCityNames.insert(city, at: 0)
         saveData()
+        saveIntoDB()
     }
     
     func saveData() {
         guard let dataEncodedCitys = try? JSONEncoder().encode(listOfSearchedCityNames) else { return }
         UserDefaults.standard.setValue(dataEncodedCitys, forKey: "listOfCityNames")
-        print(dataEncodedCitys, "is updated")
+        wasChangedAtCurrentSession = true
+//        print(dataEncodedCitys, "is updated")
     }
     
     func loadData() -> Bool {
@@ -139,57 +137,99 @@ class DataManager {
             print("First start")
             return false
         }
-        guard let cityNames = try? JSONDecoder().decode([Citys].self, from: decodedCityNames) else {
+        guard let cityNames = try? JSONDecoder().decode([City].self, from: decodedCityNames) else {
             return false
         }
         sortSearchedValues(cityNames)
         fetchLast()
-        print(decodedCityNames, "is loaded")
+//        print(decodedCityNames, "is loaded")
         return true
     }
     
     func saveSettings() {
-        let save = Settings(language: language, languageID: languageID, scale: scale, unit: unit)
+        let save = Settings(language: settings.language, languageID: settings.languageID, scale: settings.scale, unit: settings.unit)
         guard let encodeData = try? JSONEncoder().encode(save) else { return }
         UserDefaults.standard.setValue(encodeData, forKey: "settings")
     }
     
     func loadSettings() {
-        guard let decodedSettings = UserDefaults.standard.object(forKey: "settings") as? Data else {
+        guard let loadedSettings = UserDefaults.standard.object(forKey: "settings") as? Data else {
+            let newSettings = Settings(language: "Руский", languageID: "ru", scale: "°C", unit: "metric")
+            self.settings = newSettings
             return
         }
-        guard let settings = try? JSONDecoder().decode(Settings.self,
-                                                         from: decodedSettings) else { return }
-        languageID = settings.languageID
-        language = settings.language
-        scale = settings.scale
-        unit = settings.unit
+        guard let decodedSettings = try? JSONDecoder().decode(Settings.self,
+                                                         from: loadedSettings) else { return }
+        let newSettings = Settings(language: decodedSettings.language, languageID: decodedSettings.languageID, scale: decodedSettings.scale, unit: decodedSettings.unit)
+        self.settings = newSettings
     }
-    
     
     func saveIntoDB() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        let citys: [String : Bool] = {
-            var temporary:  [String : Bool] = [:]
+        guard !listOfSearchedCityNames.isEmpty else { return }
+        let citys: [String : String] = {
+            var temporary:  [String : String] = [:]
             for city in listOfSearchedCityNames {
-                temporary[city.name] = city.isFavorite
+                if city.isFavorite {
+                    temporary[city.name] = "true"
+                } else {
+                    temporary[city.name] = "false"
+                }
             }
             return temporary
         }()
-        let settingsLayer: [String : Bool] = [language: true, unit : true]
-        var layerOne = ["citys": citys, "settings": settingsLayer]
+        let settingsLayer: [String : String] = ["language": settings.language,
+                                              "languageID" : settings.languageID,
+                                              "scale" : settings.scale,
+                                              "unit" : settings.unit]
+        let layerOne = ["citys": citys, "settings": settingsLayer]
         let userData = [uid : layerOne]
         Database.database().reference().child("users").updateChildValues(userData) { error, _ in
             if let error = error {
                 print(error)
-                print("DB is NOT saved")
-//                self.present(self.alert("\(error.localizedDescription )"), animated: true)
             } else {
-                print("DB is saved")
+//                print("DB updated")
             }
         }
     }
     
+    func fetchFromDB() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Database.database().reference()
+            .child("users")
+            .child(uid).observeSingleEvent(of: .value) { dataSnapshot in
+                guard let userData = dataSnapshot.value as? [String: [String: String]] else { return }
+                for identification in userData {
+                    if identification.key == "settings" {
+                        var listOfSettings: [String: String] = [:]
+                        listOfSettings = identification.value
+                        guard listOfSettings["language"] != nil,
+                              listOfSettings["languageID"] != nil,
+                              listOfSettings["scale"] != nil,
+                              listOfSettings["unit"] != nil else { return }
+                        self.settings.language = listOfSettings["language"]!
+                        self.settings.languageID = listOfSettings["languageID"]!
+                        self.settings.scale = listOfSettings["scale"]!
+                        self.settings.unit = listOfSettings["unit"]!
+                    }
+                    if identification.key == "citys" {
+                        var finalList: [City] = []
+                        let listOfFetchedCitys: [String: String] = identification.value
+                        guard !listOfFetchedCitys.isEmpty else { return }
+                        for fetchedCity in listOfFetchedCitys {
+                            let isFavorite = fetchedCity.value == "true" ? true : false
+                            let city = City(name: fetchedCity.key, date: Date(), isFavorite: isFavorite)
+                            finalList.append(city)
+                        }
+                        self.listOfSearchedCityNames = finalList
+                        self.saveData()
+                        self.saveSettings()
+                    }
+                }
+            } withCancel: { error in
+                print(error)
+            }
+    }
 }
 
 

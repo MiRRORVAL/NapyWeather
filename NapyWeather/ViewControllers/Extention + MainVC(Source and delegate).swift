@@ -48,6 +48,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             dataManager.listOfSearchedCityNames.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             dataManager.saveData()
+            dataManager.saveIntoDB()
         }
     }
 }

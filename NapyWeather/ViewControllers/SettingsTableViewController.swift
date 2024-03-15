@@ -28,8 +28,7 @@ class SettingsTableViewController: UITableViewController {
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        dataMeneger.saveSettings()
-        dataMeneger.fetchLast()
+        
     }
     
     func setUnitsButton() {
@@ -37,15 +36,18 @@ class SettingsTableViewController: UITableViewController {
         var resaltList: [UIAction] = []
         
         let optionClosure = { (action : UIAction) in
-            self.dataMeneger.unit = unitsList[action.title]!
-            self.dataMeneger.scale = action.title
+            self.dataMeneger.settings.unit = unitsList[action.title]!
+            self.dataMeneger.settings.scale = action.title
+            self.dataMeneger.saveSettings()
+            self.dataMeneger.saveIntoDB()
+            self.dataMeneger.fetchLast()
             self.setUnitsButton()
         }
         let image = UIImage(systemName: "circle")?.withTintColor(.yellow, renderingMode: .alwaysOriginal)
         let checkmarkImage = UIImage(systemName: "circle.fill")?.withTintColor(.yellow, renderingMode: .alwaysTemplate)
         for selection in unitsList.keys {
-            if selection == dataMeneger.scale {
-                resaltList.insert(UIAction(title: dataMeneger.scale, image: checkmarkImage, state: .on, handler: optionClosure), at: 0)
+            if selection == dataMeneger.settings.scale {
+                resaltList.insert(UIAction(title: dataMeneger.settings.scale, image: checkmarkImage, state: .on, handler: optionClosure), at: 0)
             } else {
                 resaltList.append(UIAction(title: selection, image: image, handler: optionClosure))
             }
@@ -58,15 +60,18 @@ class SettingsTableViewController: UITableViewController {
         let languagesList: [String: String] = ["Руский": "ru", "Английский": "en", "Французкий": "fr", "Индуский": "hi", "Итальянский": "it", "Испанский": "sp", "Украинский": "ua", "Турецкий": "tr"]
         var resaltList: [UIAction] = []
         let optionClosure = { (action : UIAction) in
-            self.dataMeneger.languageID = languagesList[action.title]!
-            self.dataMeneger.language = action.title
+            self.dataMeneger.settings.languageID = languagesList[action.title]!
+            self.dataMeneger.settings.language = action.title
+            self.dataMeneger.saveSettings()
+            self.dataMeneger.saveIntoDB()
+            self.dataMeneger.fetchLast()
             self.setLanguageButton()
         }
         let image = UIImage(systemName: "circle")?.withTintColor(.yellow, renderingMode: .alwaysOriginal)
         let checkmarkImage = UIImage(systemName: "circle.fill")?.withTintColor(.yellow, renderingMode: .alwaysTemplate)
         for selection in languagesList.keys {
-            if selection == dataMeneger.language {
-                resaltList.insert(UIAction(title: dataMeneger.language, image: checkmarkImage, state: .on, handler: optionClosure), at: 0)
+            if selection == dataMeneger.settings.language {
+                resaltList.insert(UIAction(title: dataMeneger.settings.language, image: checkmarkImage, state: .on, handler: optionClosure), at: 0)
             } else {
                 resaltList.append(UIAction(title: selection, image: image, handler: optionClosure))
             }

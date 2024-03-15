@@ -21,6 +21,7 @@ class SearchTableViewCell: UITableViewCell {
         guard let indexPath = superview.indexPath(for: self) else { return }
         dataManager.listOfSearchedCityNames[indexPath.row].isFavorite.toggle()
         dataManager.saveData()
+        dataManager.saveIntoDB()
         superview.reloadData()
     }
 }

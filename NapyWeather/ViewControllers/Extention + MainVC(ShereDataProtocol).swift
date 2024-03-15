@@ -12,8 +12,8 @@ extension MainViewController: ShareWeatherDataProtocol {
     func updateUIWithNewData(_ weather: WeatherRightNow) {
         DispatchQueue.main.async {
             self.baseStackView.isHidden = false
-            self.tempLabel.text = "\(weather.main.temp) \(self.dataManager.scale)"
-            self.tempFeelsLikeLabel.text = "\(weather.main.feelsLike) \(self.dataManager.scale)"
+            self.tempLabel.text = "\(weather.main.temp) \(self.dataManager.settings.scale)"
+            self.tempFeelsLikeLabel.text = "\(weather.main.feelsLike) \(self.dataManager.settings.scale)"
             self.windSpeedLable.text = "\(weather.wind.speed)"
             self.preshureLable.text = {
                 let presshureCalc = Double(weather.main.pressure) / 0.75006375541921

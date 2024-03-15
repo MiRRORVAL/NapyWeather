@@ -50,10 +50,14 @@ class LoginViewController: UIViewController {
             } else {
                 self.switchStackViews()
                 self.welcomeLable.text = "\(user?.user.email ?? "")"
-                self.dataMeneger.saveIntoDB()
                 }
             }
         }
+    
+    @IBAction func syncButtonPressed(_ sender: UIButton) {
+        dataMeneger.fetchFromDB()
+        present(alert("Завершено"), animated: true)
+    }
     
     @IBAction func signupButtonPressed(_ sender: UIButton) {
         if repeatPaswordTextField.isHidden != false {

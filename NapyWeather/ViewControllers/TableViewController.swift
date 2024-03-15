@@ -18,8 +18,10 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataManager.delegateTableByProtocol = self
-        activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
+        if !citys.isEmpty {
+            activityIndicator.startAnimating()
+        }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -29,8 +31,7 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellBookmark", for: indexPath)
         cell.textLabel?.text = citys[indexPath.row].name
-        cell.detailTextLabel?.text = "\(citys[indexPath.row].main.temp) \(dataManager.scale)"
-        
+        cell.detailTextLabel?.text = "\(citys[indexPath.row].main.temp) \(dataManager.settings.scale)"
         if indexPath.row == citys.count - 1 {
             activityIndicator.stopAnimating()
         }

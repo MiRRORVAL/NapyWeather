@@ -5,7 +5,6 @@
 //  Created by Nur on 2/8/24.
 //
 
-import Foundation
 
 // MARK: - WeatherRightNow
 struct WeatherRightNow: Codable {

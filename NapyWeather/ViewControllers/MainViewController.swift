@@ -69,7 +69,6 @@ class MainViewController: UIViewController {
         if !dataManager.loadData() {
             searchLocation()
         }
-        dataManager.saveIntoDB()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -133,8 +132,6 @@ class MainViewController: UIViewController {
         guard let inputSrting = searchTextField.text, inputSrting != "" else { return }
         dataManager.fetchData(inputSrting)
     }
-    
-    @IBAction func unwindeToFirst(_ sender: UIStoryboardSegue) {}
 }
 
     
