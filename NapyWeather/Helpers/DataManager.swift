@@ -30,7 +30,7 @@ class DataManager {
             do {
                 let decodedData = try JSONDecoder().decode(WeatherRightNow.self, from: data)
                 self.delegateByProtocol?.updateUIWithNewData(decodedData)
-                self.updateData(decodedData.name)
+                self.updateData(decodedData)
             } catch let error {
                 print(error.localizedDescription)
             }
@@ -105,22 +105,21 @@ class DataManager {
         listOfSearchedCityNames = sortedList
     }
     
-    func updateData(_ name: String) {
+    func updateData(_ weather: WeatherRightNow) {
         var counter = 0
         for city in listOfSearchedCityNames {
-            if city.name == name {
-                let city = City(name: name, date: Date(), isFavorite: city.isFavorite)
+            if city.id == weather.id {
+                let replaceCity = City(name: weather.name, date: Date(), id: weather.id, isFavorite: city.isFavorite)
                 listOfSearchedCityNames.remove(at: counter)
-                listOfSearchedCityNames.insert(city, at: 0)
+                listOfSearchedCityNames.insert(replaceCity, at: 0)
                 saveData()
-                saveIntoDB()
                 return
             } else {
                 counter += 1
             }
         }
-        let city = City(name: name, date: Date(), isFavorite: false)
-        listOfSearchedCityNames.insert(city, at: 0)
+        let newCity = City(name: weather.name, date: Date(), id: weather.id, isFavorite: false)
+        listOfSearchedCityNames.insert(newCity, at: 0)
         saveData()
         saveIntoDB()
     }
@@ -129,7 +128,6 @@ class DataManager {
         guard let dataEncodedCitys = try? JSONEncoder().encode(listOfSearchedCityNames) else { return }
         UserDefaults.standard.setValue(dataEncodedCitys, forKey: "listOfCityNames")
         wasChangedAtCurrentSession = true
-//        print(dataEncodedCitys, "is updated")
     }
     
     func loadData() -> Bool {
@@ -142,7 +140,6 @@ class DataManager {
         }
         sortSearchedValues(cityNames)
         fetchLast()
-//        print(decodedCityNames, "is loaded")
         return true
     }
     
@@ -170,11 +167,7 @@ class DataManager {
         let citys: [String : String] = {
             var temporary:  [String : String] = [:]
             for city in listOfSearchedCityNames {
-                if city.isFavorite {
-                    temporary[city.name] = "true"
-                } else {
-                    temporary[city.name] = "false"
-                }
+                temporary["\(city.name)-\(city.id)"] = city.isFavorite ? "true" : "false"
             }
             return temporary
         }()
@@ -188,7 +181,7 @@ class DataManager {
             if let error = error {
                 print(error)
             } else {
-//                print("DB updated")
+                print("DB updated")
             }
         }
     }
@@ -218,7 +211,15 @@ class DataManager {
                         guard !listOfFetchedCitys.isEmpty else { return }
                         for fetchedCity in listOfFetchedCitys {
                             let isFavorite = fetchedCity.value == "true" ? true : false
-                            let city = City(name: fetchedCity.key, date: Date(), isFavorite: isFavorite)
+                            let key = fetchedCity.key
+                            let list = key.components(separatedBy: "-")
+                            guard let id: Int = Int(list[1]) else { return }
+                            let name: String? = list[0]
+                            guard let name = name else { return }
+                            let city = City(name: name,
+                                            date: Date(),
+                                            id: id,
+                                            isFavorite: isFavorite)
                             finalList.append(city)
                         }
                         self.listOfSearchedCityNames = finalList

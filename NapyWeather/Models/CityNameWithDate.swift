@@ -11,11 +11,6 @@ struct City: Codable, Hashable {
     
     let name: String
     let date: Date
+    let id: Int
     var isFavorite: Bool
-    
-    init(name: String, date: Date, isFavorite: Bool) {
-        self.name = name
-        self.date = Date()
-        self.isFavorite = isFavorite
-    }
 }
